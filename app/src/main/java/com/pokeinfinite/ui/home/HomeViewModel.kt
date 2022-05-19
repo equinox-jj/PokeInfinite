@@ -10,8 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    repository: PokemonRepository,
-    state: SavedStateHandle
+    repository: PokemonRepository
 ) : ViewModel() {
 
     val pokemonPaging = repository.getPokemonPaging().cachedIn(viewModelScope)
