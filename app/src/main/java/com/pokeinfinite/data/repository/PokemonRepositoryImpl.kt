@@ -4,26 +4,26 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.pokeinfinite.data.model.PokemonResponse
-import com.pokeinfinite.data.network.ApiService
-import com.pokeinfinite.data.source.remote.PokemonPagingSource
+import com.pokeinfinite.data.source.remote.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PokemonRepository @Inject constructor(
-    private val apiService: ApiService
-) {
+class PokemonRepositoryImpl @Inject constructor(
+    private val remoteDataSource: RemoteDataSource
+) : PokemonRepository {
 
-    fun getPokemonPaging(): Flow<PagingData<PokemonResponse.PokemonResult>> = Pager(
+    override fun getPokemonPaging(): Flow<PagingData<PokemonResponse.PokemonResult>> = Pager(
         config = PagingConfig(enablePlaceholders = false, pageSize = 20),
-        pagingSourceFactory = { PokemonPagingSource(apiService) }
+        pagingSourceFactory = { remoteDataSource.getPokemonPagingSource() }
     ).flow
+
 
     /*suspend fun getPokemonPaging(): Flow<PagingData<PokemonResponse.PokemonResult>> = Pager(
     config = PagingConfig(
         pageSize = 20,
         enablePlaceholders = false
     ),
-    pagingSourceFactory = { PokemonPagingSource(apiService) }
+    pagingSourceFactory = { RemoteDataSourceImpl(apiService) }
 ).flow*/
 
     /*fun getSearchResults(query: String) = Pager(
@@ -34,4 +34,5 @@ class PokemonRepository @Inject constructor(
         ),
         pagingSourceFactory = { UnsplashPagingSource(unsplashApi, query) }
     ).liveData*/
+
 }

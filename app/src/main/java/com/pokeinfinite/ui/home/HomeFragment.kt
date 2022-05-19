@@ -5,12 +5,15 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.pokeinfinite.R
 import com.pokeinfinite.databinding.FragmentHomeBinding
 import com.pokeinfinite.ui.adapter.ItemLoadStateAdapter
 import com.pokeinfinite.ui.adapter.PokemonPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -20,7 +23,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val mHomeViewModel by viewModels<HomeViewModel>()
     private lateinit var mPokemonPagingAdapter: PokemonPagingAdapter
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,11 +61,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initViewModel() {
-        mHomeViewModel.getPokemonPagingSource()
-        mHomeViewModel.pokemonPagingData.observe(viewLifecycleOwner) {
-            mPokemonPagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-            binding.rvPokemonList.visibility = View.VISIBLE
+        viewLifecycleOwner.lifecycleScope.launch {
+            mHomeViewModel.pokemonPaging.collectLatest {
+                mPokemonPagingAdapter.submitData(it)
+            }
         }
+//        mHomeViewModel.getPokemonPagingSource()
+//        mHomeViewModel.pokemonPagingData.observe(viewLifecycleOwner) {
+//            mPokemonPagingAdapter.submitData(it)
+//        }
     }
 
     override fun onDestroyView() {

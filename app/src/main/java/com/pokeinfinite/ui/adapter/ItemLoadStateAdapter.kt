@@ -8,8 +8,7 @@ import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pokeinfinite.databinding.ItemLoadStateAdapterBinding
 
-class ItemLoadStateAdapter(private val retry: () -> Unit) :
-    LoadStateAdapter<ItemLoadStateAdapter.LoadStateViewHolder>() {
+class ItemLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<ItemLoadStateAdapter.LoadStateViewHolder>() {
 
     inner class LoadStateViewHolder(private val binding: ItemLoadStateAdapterBinding) :
         RecyclerView.ViewHolder(binding.root) {

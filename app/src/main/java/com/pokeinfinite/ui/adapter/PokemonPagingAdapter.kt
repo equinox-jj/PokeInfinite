@@ -38,8 +38,7 @@ class PokemonPagingAdapter : PagingDataAdapter<PokemonResponse.PokemonResult, Po
     }
 
     companion object {
-        private val POKEMON_COMPARATOR =
-            object : DiffUtil.ItemCallback<PokemonResponse.PokemonResult>() {
+        private val POKEMON_COMPARATOR = object : DiffUtil.ItemCallback<PokemonResponse.PokemonResult>() {
                 override fun areItemsTheSame(
                     oldItem: PokemonResponse.PokemonResult,
                     newItem: PokemonResponse.PokemonResult

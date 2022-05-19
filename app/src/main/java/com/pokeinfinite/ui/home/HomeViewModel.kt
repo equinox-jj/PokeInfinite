@@ -1,30 +1,31 @@
 package com.pokeinfinite.ui.home
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import com.pokeinfinite.data.model.PokemonResponse
+import androidx.paging.cachedIn
 import com.pokeinfinite.data.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: PokemonRepository
+    repository: PokemonRepository,
+    state: SavedStateHandle
 ) : ViewModel() {
 
-    private val _pokemonPagingData = MutableLiveData<PagingData<PokemonResponse.PokemonResult>>()
-    val pokemonPagingData = _pokemonPagingData
+    val pokemonPaging = repository.getPokemonPaging().cachedIn(viewModelScope)
 
-    fun getPokemonPagingSource() {
-        viewModelScope.launch {
-            repository.getPokemonPaging()
-                .collect {
-                    _pokemonPagingData.value = it
-                }
-        }
-    }
+//    private val _pokemonPagingData = MutableLiveData<PagingData<PokemonResponse.PokemonResult>>()
+//    val pokemonPagingData: LiveData<PagingData<PokemonResponse.PokemonResult>> get() = _pokemonPagingData
+
+//    fun getPokemonPagingSource() {
+//        viewModelScope.launch {
+//            repository.getPokemonPaging()
+//                .collectLatest {
+//                    _pokemonPagingData.value = it
+//                }
+//        }
+//    }
 
 }
