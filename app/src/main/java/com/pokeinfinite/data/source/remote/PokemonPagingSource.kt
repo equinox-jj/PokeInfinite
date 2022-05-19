@@ -17,20 +17,20 @@ class PokemonPagingSource @Inject constructor(
         return state.anchorPosition
     }
 
-    override suspend fun load(params: LoadParams<Int>): PagingSource.LoadResult<Int, PokemonResponse.PokemonResult> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonResponse.PokemonResult> {
         val pokemonOffset = params.key ?: OFFSET
 
         return try {
             val response = apiService.getPokemonResponse(pokemonOffset, params.loadSize)
             val pokemon = response.results
 
-            PagingSource.LoadResult.Page(
+            LoadResult.Page(
                 data = pokemon,
-                prevKey = if (pokemonOffset == OFFSET) null else pokemonOffset - 20,
-                nextKey = if (pokemon.isEmpty()) null else pokemonOffset + 20
+                prevKey = if (pokemonOffset == OFFSET) null else pokemonOffset - 1,
+                nextKey = if (pokemon.isEmpty()) null else pokemonOffset + 1
             )
         } catch (exception: IOException) {
-            PagingSource.LoadResult.Error(exception)
+            LoadResult.Error(exception)
         } catch (exception: HttpException) {
             LoadResult.Error(exception)
         }

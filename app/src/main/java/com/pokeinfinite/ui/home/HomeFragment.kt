@@ -2,10 +2,13 @@ package com.pokeinfinite.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import com.pokeinfinite.R
 import com.pokeinfinite.databinding.FragmentHomeBinding
+import com.pokeinfinite.ui.adapter.ItemLoadStateAdapter
 import com.pokeinfinite.ui.adapter.PokemonPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,9 +32,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initRecyclerView() {
-        binding.rvPokemonList.apply {
+        binding.apply {
             mPokemonPagingAdapter = PokemonPagingAdapter()
-            adapter = mPokemonPagingAdapter
+            rvPokemonList.adapter = mPokemonPagingAdapter.withLoadStateHeaderAndFooter(
+                header = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() },
+                footer = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() }
+            )
+            buttonRetryHome.setOnClickListener { mPokemonPagingAdapter.retry() }
+            rvPokemonList.setHasFixedSize(true)
+        }
+        mPokemonPagingAdapter.addLoadStateListener { loadState ->
+            binding.apply {
+//                rvPokemonList.isVisible = loadState.source.refresh is LoadState.Loading
+                buttonRetryHome.isVisible = loadState.source.refresh is LoadState.Error
+
+//                if (loadState.source.refresh is LoadState.NotLoading &&
+//                    loadState.append.endOfPaginationReached &&
+//                    mPokemonPagingAdapter.itemCount < 1
+//                ) {
+//                    rvPokemonList.isVisible = false
+//                } else {
+//                textViewEmpty.isVisible = false
+//                }
+            }
         }
     }
 
