@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.pokeinfinite.data.model.PokemonResponse
 import com.pokeinfinite.data.network.ApiService
+import com.pokeinfinite.utils.Constants.LIMIT
 import com.pokeinfinite.utils.Constants.OFFSET
 import retrofit2.HttpException
 import java.io.IOException
@@ -29,8 +30,8 @@ class RemoteDataSourceImpl @Inject constructor(
 
                     LoadResult.Page(
                         data = pokemon,
-                        prevKey = if (pokemonOffset == OFFSET) null else pokemonOffset - 20,
-                        nextKey = if (pokemon.isEmpty()) null else pokemonOffset + 20
+                        prevKey = if (pokemonOffset == OFFSET) null else pokemonOffset - LIMIT,
+                        nextKey = if (pokemon.isEmpty()) null else pokemonOffset + LIMIT
                     )
                 } catch (exception: IOException) {
                     LoadResult.Error(exception)

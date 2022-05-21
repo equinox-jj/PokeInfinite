@@ -36,17 +36,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun initRecyclerView() {
         binding.apply {
             mPokemonPagingAdapter = PokemonPagingAdapter()
+            rvPokemonList.setHasFixedSize(true)
+            rvPokemonList.itemAnimator = null
             rvPokemonList.adapter = mPokemonPagingAdapter.withLoadStateHeaderAndFooter(
                 header = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() },
                 footer = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() }
             )
-            buttonRetryHome.setOnClickListener { mPokemonPagingAdapter.retry() }
-            rvPokemonList.setHasFixedSize(true)
+            btnErrorLoad.setOnClickListener { mPokemonPagingAdapter.retry() }
         }
         mPokemonPagingAdapter.addLoadStateListener { loadState ->
             binding.apply {
-//                rvPokemonList.isVisible = loadState.source.refresh is LoadState.Loading
-                buttonRetryHome.isVisible = loadState.source.refresh is LoadState.Error
+                tvErrorLoad.isVisible = loadState.source.refresh is LoadState.Error
+                btnErrorLoad.isVisible = loadState.source.refresh is LoadState.Error
+//                tvErrorLoad.isVisible = loadState.source.refresh is LoadState.Loading
 
 //                if (loadState.source.refresh is LoadState.NotLoading &&
 //                    loadState.append.endOfPaginationReached &&
@@ -57,7 +59,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 //                textViewEmpty.isVisible = false
 //                }
             }
+
         }
+
     }
 
     private fun initViewModel() {
