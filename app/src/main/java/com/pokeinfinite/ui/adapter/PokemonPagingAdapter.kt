@@ -5,20 +5,16 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.pokeinfinite.data.model.PokemonResponse
+import com.pokeinfinite.data.model.PokemonResult
 import com.pokeinfinite.databinding.ItemPokemonListBinding
 
-class PokemonPagingAdapter : PagingDataAdapter<PokemonResponse.PokemonResult, PokemonPagingAdapter.PokemonViewHolder>(POKEMON_COMPARATOR) {
+class PokemonPagingAdapter : PagingDataAdapter<PokemonResult, PokemonPagingAdapter.PokemonViewHolder>(POKEMON_COMPARATOR) {
 
     inner class PokemonViewHolder(private val binding: ItemPokemonListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(pokemonResponse: PokemonResponse.PokemonResult) {
-            val pokemonImage = pokemonResponse.getPokemonImage()
-            binding.tvPokemonList.text = pokemonResponse.name
-            binding.ivPokemonList.load(pokemonImage) {
-                crossfade(200)
-            }
+        fun bind(pokemonResult: PokemonResult) {
+            binding.pokemonResults = pokemonResult
+            binding.executePendingBindings()
         }
     }
 
@@ -29,25 +25,19 @@ class PokemonPagingAdapter : PagingDataAdapter<PokemonResponse.PokemonResult, Po
         }
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): PokemonPagingAdapter.PokemonViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonPagingAdapter.PokemonViewHolder {
         val binding = ItemPokemonListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PokemonViewHolder(binding)
     }
 
     companion object {
-        private val POKEMON_COMPARATOR = object : DiffUtil.ItemCallback<PokemonResponse.PokemonResult>() {
-                override fun areItemsTheSame(
-                    oldItem: PokemonResponse.PokemonResult,
-                    newItem: PokemonResponse.PokemonResult
-                ) = oldItem.name == newItem.name
+        private val POKEMON_COMPARATOR = object : DiffUtil.ItemCallback<PokemonResult>() {
+            override fun areItemsTheSame(oldItem: PokemonResult, newItem: PokemonResult) =
+                oldItem.name == newItem.name
 
-                override fun areContentsTheSame(
-                    oldItem: PokemonResponse.PokemonResult,
-                    newItem: PokemonResponse.PokemonResult
-                ) = oldItem == newItem
-            }
+            override fun areContentsTheSame(oldItem: PokemonResult, newItem: PokemonResult) =
+                oldItem == newItem
+        }
     }
+
 }

@@ -12,7 +12,6 @@ import com.pokeinfinite.databinding.FragmentHomeBinding
 import com.pokeinfinite.ui.adapter.ItemLoadStateAdapter
 import com.pokeinfinite.ui.adapter.PokemonPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -22,7 +21,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding get() = _binding!!
 
     private val mHomeViewModel by viewModels<HomeViewModel>()
-    private lateinit var mPokemonPagingAdapter: PokemonPagingAdapter
+    private val mPokemonPagingAdapter by lazy { PokemonPagingAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,9 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initRecyclerView() {
         binding.apply {
-            mPokemonPagingAdapter = PokemonPagingAdapter()
             rvPokemonList.setHasFixedSize(true)
-            rvPokemonList.itemAnimator = null
             rvPokemonList.adapter = mPokemonPagingAdapter.withLoadStateHeaderAndFooter(
                 header = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() },
                 footer = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() }
@@ -66,14 +63,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            mHomeViewModel.pokemonPaging.collectLatest {
-                mPokemonPagingAdapter.submitData(it)
-            }
+            mHomeViewModel.pokemonPaging.collect { mPokemonPagingAdapter.submitData(it) }
         }
-//        mHomeViewModel.getPokemonPagingSource()
-//        mHomeViewModel.pokemonPagingData.observe(viewLifecycleOwner) {
-//            mPokemonPagingAdapter.submitData(it)
-//        }
     }
 
     override fun onDestroyView() {

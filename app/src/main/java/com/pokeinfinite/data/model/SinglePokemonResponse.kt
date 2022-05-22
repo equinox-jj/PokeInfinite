@@ -3,378 +3,543 @@ package com.pokeinfinite.data.model
 import com.google.gson.annotations.SerializedName
 
 data class SinglePokemonResponse(
-    @SerializedName("abilities") val abilities: List<Ability?>?,
-    @SerializedName("base_experience") val baseExperience: Int?,
-    @SerializedName("forms") val forms: List<Form?>?,
-    @SerializedName("game_indices") val gameIndices: List<GameIndice?>?,
-    @SerializedName("height") val height: Int?,
-    @SerializedName("held_items") val heldItems: List<HeldItem?>?,
-    @SerializedName("id") val id: Int?,
-    @SerializedName("is_default") val isDefault: Boolean?,
-    @SerializedName("location_area_encounters") val locationAreaEncounters: String?,
-    @SerializedName("moves") val moves: List<Move?>?,
-    @SerializedName("name") val name: String?,
-    @SerializedName("order") val order: Int?,
-    @SerializedName("past_types") val pastTypes: List<PastType?>?,
-    @SerializedName("species") val species: Species?,
-    @SerializedName("sprites") val sprites: Sprites?,
-    @SerializedName("stats") val stats: List<Stat?>?,
-    @SerializedName("types") val types: List<Type?>?,
-    @SerializedName("weight") val weight: Int?
-) {
-    data class Ability(
-        @SerializedName("ability") val ability: Ability?,
-        @SerializedName("is_hidden") val isHidden: Boolean?,
-        @SerializedName("slot") val slot: Int?
-    ) {
-        data class Ability(
-            @SerializedName("name") val name: String?,
-            @SerializedName("url") val url: String?
-        )
-    }
 
-    data class Form(
-        @SerializedName("name") val name: String?,
-        @SerializedName("url") val url: String?
-    )
+    @field:SerializedName("location_area_encounters") val locationAreaEncounters: String? = null,
+    @field:SerializedName("types") val types: List<TypesItem?>? = null,
+    @field:SerializedName("base_experience") val baseExperience: Int? = null,
+    @field:SerializedName("held_items") val heldItems: List<HeldItemsItem?>? = null,
+    @field:SerializedName("weight") val weight: Int? = null,
+    @field:SerializedName("is_default") val isDefault: Boolean? = null,
+    @field:SerializedName("past_types") val pastTypes: List<PastTypesItem?>? = null,
+    @field:SerializedName("sprites") val sprites: Sprites? = null,
+    @field:SerializedName("abilities") val abilities: List<AbilitiesItem?>? = null,
+    @field:SerializedName("game_indices") val gameIndices: List<GameIndicesItem?>? = null,
+    @field:SerializedName("species") val species: Species? = null,
+    @field:SerializedName("stats") val stats: List<StatsItem?>? = null,
+    @field:SerializedName("moves") val moves: List<MovesItem?>? = null,
+    @field:SerializedName("name") val name: String? = null,
+    @field:SerializedName("id") val id: Int? = null,
+    @field:SerializedName("forms") val forms: List<FormsItem?>? = null,
+    @field:SerializedName("height") val height: Int? = null,
+    @field:SerializedName("order") val order: Int? = null
 
-    data class GameIndice(
-        @SerializedName("game_index") val gameIndex: Int?,
-        @SerializedName("version") val version: Version?
-    ) {
-        data class Version(
-            @SerializedName("name") val name: String?,
-            @SerializedName("url") val url: String?
-        )
-    }
+)
 
-    data class HeldItem(
-        @SerializedName("item") val item: Item?,
-        @SerializedName("version_details") val versionDetails: List<VersionDetail?>?
-    ) {
-        data class Item(
-            @SerializedName("name") val name: String?,
-            @SerializedName("url") val url: String?
-        )
+data class Versions(
 
-        data class VersionDetail(
-            @SerializedName("rarity") val rarity: Int?,
-            @SerializedName("version") val version: Version?
-        ) {
-            data class Version(
-                @SerializedName("name") val name: String?,
-                @SerializedName("url") val url: String?
-            )
-        }
-    }
+    @field:SerializedName("generation-iii") val generationIii: GenerationIii? = null,
 
-    data class Move(
-        @SerializedName("move") val move: Move?,
-        @SerializedName("version_group_details") val versionGroupDetails: List<VersionGroupDetail?>?
-    ) {
-        data class Move(
-            @SerializedName("name") val name: String?,
-            @SerializedName("url") val url: String?
-        )
+    @field:SerializedName("generation-ii") val generationIi: GenerationIi? = null,
 
-        data class VersionGroupDetail(
-            @SerializedName("level_learned_at") val levelLearnedAt: Int?,
-            @SerializedName("move_learn_method") val moveLearnMethod: MoveLearnMethod?,
-            @SerializedName("version_group") val versionGroup: VersionGroup?
-        ) {
-            data class MoveLearnMethod(
-                @SerializedName("name") val name: String?,
-                @SerializedName("url") val url: String?
-            )
+    @field:SerializedName("generation-v") val generationV: GenerationV? = null,
 
-            data class VersionGroup(
-                @SerializedName("name") val name: String?,
-                @SerializedName("url") val url: String?
-            )
-        }
-    }
+    @field:SerializedName("generation-iv") val generationIv: GenerationIv? = null,
 
-    data class PastType(
-        @SerializedName("generation") val generation: Generation?,
-        @SerializedName("types") val types: List<Type?>?
-    ) {
-        data class Generation(
-            @SerializedName("name") val name: String?,
-            @SerializedName("url") val url: String?
-        )
+    @field:SerializedName("generation-vii") val generationVii: GenerationVii? = null,
 
-        data class Type(
-            @SerializedName("slot") val slot: Int?,
-            @SerializedName("type") val type: Type?
-        ) {
-            data class Type(
-                @SerializedName("name") val name: String?,
-                @SerializedName("url") val url: String?
-            )
-        }
-    }
+    @field:SerializedName("generation-i") val generationI: GenerationI? = null,
 
-    data class Species(
-        @SerializedName("name") val name: String?,
-        @SerializedName("url") val url: String?
-    )
+    @field:SerializedName("generation-viii") val generationViii: GenerationViii? = null,
 
-    data class Sprites(
-        @SerializedName("back_default") val backDefault: String?,
-        @SerializedName("back_female") val backFemale: Any?,
-        @SerializedName("back_shiny") val backShiny: String?,
-        @SerializedName("back_shiny_female") val backShinyFemale: Any?,
-        @SerializedName("front_default") val frontDefault: String?,
-        @SerializedName("front_female") val frontFemale: Any?,
-        @SerializedName("front_shiny") val frontShiny: String?,
-        @SerializedName("front_shiny_female") val frontShinyFemale: Any?,
-        @SerializedName("other") val other: Other?,
-        @SerializedName("versions") val versions: Versions?
-    ) {
-        data class Other(
-            @SerializedName("dream_world") val dreamWorld: DreamWorld?,
-            @SerializedName("home") val home: Home?,
-            @SerializedName("official-artwork") val officialArtwork: OfficialArtwork?
-        ) {
-            data class DreamWorld(
-                @SerializedName("front_default") val frontDefault: String?,
-                @SerializedName("front_female") val frontFemale: Any?
-            )
+    @field:SerializedName("generation-vi") val generationVi: GenerationVi? = null
+)
 
-            data class Home(
-                @SerializedName("front_default") val frontDefault: String?,
-                @SerializedName("front_female") val frontFemale: Any?,
-                @SerializedName("front_shiny") val frontShiny: String?,
-                @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-            )
+data class Gold(
 
-            data class OfficialArtwork(
-                @SerializedName("front_default") val frontDefault: String?
-            )
-        }
+    @field:SerializedName("back_default") val backDefault: String? = null,
 
-        data class Versions(
-            @SerializedName("generation-i") val generationI: GenerationI?,
-            @SerializedName("generation-ii") val generationIi: GenerationIi?,
-            @SerializedName("generation-iii") val generationIii: GenerationIii?,
-            @SerializedName("generation-iv") val generationIv: GenerationIv?,
-            @SerializedName("generation-v") val generationV: GenerationV?,
-            @SerializedName("generation-vi") val generationVi: GenerationVi?,
-            @SerializedName("generation-vii") val generationVii: GenerationVii?,
-            @SerializedName("generation-viii") val generationViii: GenerationViii?
-        ) {
-            data class GenerationI(
-                @SerializedName("red-blue") val redBlue: RedBlue?,
-                @SerializedName("yellow") val yellow: Yellow?
-            ) {
-                data class RedBlue(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_gray") val backGray: String?,
-                    @SerializedName("back_transparent") val backTransparent: String?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_gray") val frontGray: String?,
-                    @SerializedName("front_transparent") val frontTransparent: String?
-                )
+    @field:SerializedName("front_default") val frontDefault: String? = null,
 
-                data class Yellow(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_gray") val backGray: String?,
-                    @SerializedName("back_transparent") val backTransparent: String?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_gray") val frontGray: String?,
-                    @SerializedName("front_transparent") val frontTransparent: String?
-                )
-            }
+    @field:SerializedName("front_transparent") val frontTransparent: String? = null,
 
-            data class GenerationIi(
-                @SerializedName("crystal") val crystal: Crystal?,
-                @SerializedName("gold") val gold: Gold?,
-                @SerializedName("silver") val silver: Silver?
-            ) {
-                data class Crystal(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("back_shiny_transparent") val backShinyTransparent: String?,
-                    @SerializedName("back_transparent") val backTransparent: String?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_shiny_transparent") val frontShinyTransparent: String?,
-                    @SerializedName("front_transparent") val frontTransparent: String?
-                )
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
 
-                data class Gold(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_transparent") val frontTransparent: String?
-                )
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
 
-                data class Silver(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_transparent") val frontTransparent: String?
-                )
-            }
+data class Other(
 
-            data class GenerationIii(
-                @SerializedName("emerald") val emerald: Emerald?,
-                @SerializedName("firered-leafgreen") val fireredLeafgreen: FireredLeafgreen?,
-                @SerializedName("ruby-sapphire") val rubySapphire: RubySapphire?
-            ) {
-                data class Emerald(
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_shiny") val frontShiny: String?
-                )
+    @field:SerializedName("dream_world") val dreamWorld: DreamWorld? = null,
 
-                data class FireredLeafgreen(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_shiny") val frontShiny: String?
-                )
+    @field:SerializedName("official-artwork") val officialArtwork: OfficialArtwork? = null,
 
-                data class RubySapphire(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_shiny") val frontShiny: String?
-                )
-            }
+    @field:SerializedName("home") val home: Home? = null
+)
 
-            data class GenerationIv(
-                @SerializedName("diamond-pearl") val diamondPearl: DiamondPearl?,
-                @SerializedName("heartgold-soulsilver") val heartgoldSoulsilver: HeartgoldSoulsilver?,
-                @SerializedName("platinum") val platinum: Platinum?
-            ) {
-                data class DiamondPearl(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_female") val backFemale: Any?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("back_shiny_female") val backShinyFemale: Any?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-                )
+data class Type(
 
-                data class HeartgoldSoulsilver(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_female") val backFemale: Any?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("back_shiny_female") val backShinyFemale: Any?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-                )
+    @field:SerializedName("name") val name: String? = null,
 
-                data class Platinum(
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_female") val backFemale: Any?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("back_shiny_female") val backShinyFemale: Any?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-                )
-            }
+    @field:SerializedName("url") val url: String? = null
+)
 
-            data class GenerationV(
-                @SerializedName("black-white") val blackWhite: BlackWhite?
-            ) {
-                data class BlackWhite(
-                    @SerializedName("animated") val animated: Animated?,
-                    @SerializedName("back_default") val backDefault: String?,
-                    @SerializedName("back_female") val backFemale: Any?,
-                    @SerializedName("back_shiny") val backShiny: String?,
-                    @SerializedName("back_shiny_female") val backShinyFemale: Any?,
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-                ) {
-                    data class Animated(
-                        @SerializedName("back_default") val backDefault: String?,
-                        @SerializedName("back_female") val backFemale: Any?,
-                        @SerializedName("back_shiny") val backShiny: String?,
-                        @SerializedName("back_shiny_female") val backShinyFemale: Any?,
-                        @SerializedName("front_default") val frontDefault: String?,
-                        @SerializedName("front_female") val frontFemale: Any?,
-                        @SerializedName("front_shiny") val frontShiny: String?,
-                        @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-                    )
-                }
-            }
+data class Version(
 
-            data class GenerationVi(
-                @SerializedName("omegaruby-alphasapphire") val omegarubyAlphasapphire: OmegarubyAlphasapphire?,
-                @SerializedName("x-y") val xY: XY?
-            ) {
-                data class OmegarubyAlphasapphire(
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-                )
+    @field:SerializedName("name") val name: String? = null,
 
-                data class XY(
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-                )
-            }
+    @field:SerializedName("url") val url: String? = null
+)
 
-            data class GenerationVii(
-                @SerializedName("icons") val icons: Icons?,
-                @SerializedName("ultra-sun-ultra-moon") val ultraSunUltraMoon: UltraSunUltraMoon?
-            ) {
-                data class Icons(
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?
-                )
+data class Stat(
 
-                data class UltraSunUltraMoon(
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?,
-                    @SerializedName("front_shiny") val frontShiny: String?,
-                    @SerializedName("front_shiny_female") val frontShinyFemale: Any?
-                )
-            }
+    @field:SerializedName("name") val name: String? = null,
 
-            data class GenerationViii(
-                @SerializedName("icons") val icons: Icons?
-            ) {
-                data class Icons(
-                    @SerializedName("front_default") val frontDefault: String?,
-                    @SerializedName("front_female") val frontFemale: Any?
-                )
-            }
-        }
-    }
+    @field:SerializedName("url") val url: String? = null
+)
 
-    data class Stat(
-        @SerializedName("base_stat") val baseStat: Int?,
-        @SerializedName("effort") val effort: Int?,
-        @SerializedName("stat") val stat: Stat?
-    ) {
-        data class Stat(
-            @SerializedName("name") val name: String?,
-            @SerializedName("url") val url: String?
-        )
-    }
+data class Emerald(
 
-    data class Type(
-        @SerializedName("slot") val slot: Int?,
-        @SerializedName("type") val type: Type?
-    ) {
-        data class Type(
-            @SerializedName("name") val name: String?,
-            @SerializedName("url") val url: String?
-        )
-    }
-}
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class TypesItem(
+
+    @field:SerializedName("slot") val slot: Int? = null,
+
+    @field:SerializedName("type") val type: Type? = null
+)
+
+data class Icons(
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null
+)
+
+data class Crystal(
+
+    @field:SerializedName("back_transparent") val backTransparent: String? = null,
+
+    @field:SerializedName("back_shiny_transparent") val backShinyTransparent: String? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_transparent") val frontTransparent: String? = null,
+
+    @field:SerializedName("front_shiny_transparent") val frontShinyTransparent: String? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class Platinum(
+
+    @field:SerializedName("back_shiny_female") val backShinyFemale: Any? = null,
+
+    @field:SerializedName("back_female") val backFemale: Any? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class Move(
+
+    @field:SerializedName("name") val name: String? = null,
+
+    @field:SerializedName("url") val url: String? = null
+)
+
+data class GenerationVii(
+
+    @field:SerializedName("icons") val icons: Icons? = null,
+
+    @field:SerializedName("ultra-sun-ultra-moon") val ultraSunUltraMoon: UltraSunUltraMoon? = null
+)
+
+data class Silver(
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_transparent") val frontTransparent: String? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class GenerationIii(
+
+    @field:SerializedName("firered-leafgreen") val fireredLeafgreen: FireredLeafgreen? = null,
+
+    @field:SerializedName("ruby-sapphire") val rubySapphire: RubySapphire? = null,
+
+    @field:SerializedName("emerald") val emerald: Emerald? = null
+)
+
+data class UltraSunUltraMoon(
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class HeartgoldSoulsilver(
+
+    @field:SerializedName("back_shiny_female") val backShinyFemale: Any? = null,
+
+    @field:SerializedName("back_female") val backFemale: Any? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class VersionGroupDetailsItem(
+
+    @field:SerializedName("level_learned_at") val levelLearnedAt: Int? = null,
+
+    @field:SerializedName("version_group") val versionGroup: VersionGroup? = null,
+
+    @field:SerializedName("move_learn_method") val moveLearnMethod: MoveLearnMethod? = null
+)
+
+data class Animated(
+
+    @field:SerializedName("back_shiny_female") val backShinyFemale: Any? = null,
+
+    @field:SerializedName("back_female") val backFemale: Any? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class GenerationVi(
+
+    @field:SerializedName("omegaruby-alphasapphire") val omegarubyAlphasapphire: OmegarubyAlphasapphire? = null,
+
+    @field:SerializedName("x-y") val xY: XY? = null
+)
+
+data class XY(
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class DreamWorld(
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null
+)
+
+data class Home(
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class RedBlue(
+
+    @field:SerializedName("front_gray") val frontGray: String? = null,
+
+    @field:SerializedName("back_transparent") val backTransparent: String? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("back_gray") val backGray: String? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_transparent") val frontTransparent: String? = null
+)
+
+data class GenerationViii(
+
+    @field:SerializedName("icons") val icons: Icons? = null
+)
+
+data class Sprites(
+
+    @field:SerializedName("back_shiny_female") val backShinyFemale: Any? = null,
+
+    @field:SerializedName("back_female") val backFemale: Any? = null,
+
+    @field:SerializedName("other") val other: Other? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("versions") val versions: Versions? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class AbilitiesItem(
+
+    @field:SerializedName("is_hidden") val isHidden: Boolean? = null,
+
+    @field:SerializedName("ability") val ability: Ability? = null,
+
+    @field:SerializedName("slot") val slot: Int? = null
+)
+
+data class FormsItem(
+
+    @field:SerializedName("name") val name: String? = null,
+
+    @field:SerializedName("url") val url: String? = null
+)
+
+data class StatsItem(
+
+    @field:SerializedName("stat") val stat: Stat? = null,
+
+    @field:SerializedName("base_stat") val baseStat: Int? = null,
+
+    @field:SerializedName("effort") val effort: Int? = null
+)
+
+data class DiamondPearl(
+
+    @field:SerializedName("back_shiny_female") val backShinyFemale: Any? = null,
+
+    @field:SerializedName("back_female") val backFemale: Any? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class GenerationI(
+
+    @field:SerializedName("yellow") val yellow: Yellow? = null,
+
+    @field:SerializedName("red-blue") val redBlue: RedBlue? = null
+)
+
+data class Item(
+
+    @field:SerializedName("name") val name: String? = null,
+
+    @field:SerializedName("url") val url: String? = null
+)
+
+data class VersionGroup(
+
+    @field:SerializedName("name") val name: String? = null,
+
+    @field:SerializedName("url") val url: String? = null
+)
+
+data class BlackWhite(
+
+    @field:SerializedName("back_shiny_female") val backShinyFemale: Any? = null,
+
+    @field:SerializedName("back_female") val backFemale: Any? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("animated") val animated: Animated? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class Generation(
+
+    @field:SerializedName("name") val name: String? = null,
+
+    @field:SerializedName("url") val url: String? = null
+)
+
+data class GameIndicesItem(
+
+    @field:SerializedName("game_index") val gameIndex: Int? = null,
+
+    @field:SerializedName("version") val version: Version? = null
+)
+
+data class OmegarubyAlphasapphire(
+
+    @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_female") val frontFemale: Any? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class VersionDetailsItem(
+
+    @field:SerializedName("version") val version: Version? = null,
+
+    @field:SerializedName("rarity") val rarity: Int? = null
+)
+
+data class GenerationIi(
+
+    @field:SerializedName("gold") val gold: Gold? = null,
+
+    @field:SerializedName("crystal") val crystal: Crystal? = null,
+
+    @field:SerializedName("silver") val silver: Silver? = null
+)
+
+data class MoveLearnMethod(
+
+    @field:SerializedName("name") val name: String? = null,
+
+    @field:SerializedName("url") val url: String? = null
+)
+
+data class MovesItem(
+
+    @field:SerializedName("version_group_details") val versionGroupDetails: List<VersionGroupDetailsItem?>? = null,
+
+    @field:SerializedName("move") val move: Move? = null
+)
+
+data class HeldItemsItem(
+
+    @field:SerializedName("item") val item: Item? = null,
+
+    @field:SerializedName("version_details") val versionDetails: List<VersionDetailsItem?>? = null
+)
+
+data class FireredLeafgreen(
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class GenerationV(
+
+    @field:SerializedName("black-white") val blackWhite: BlackWhite? = null
+)
+
+data class RubySapphire(
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("back_shiny") val backShiny: String? = null,
+
+    @field:SerializedName("front_shiny") val frontShiny: String? = null
+)
+
+data class Yellow(
+
+    @field:SerializedName("front_gray") val frontGray: String? = null,
+
+    @field:SerializedName("back_transparent") val backTransparent: String? = null,
+
+    @field:SerializedName("back_default") val backDefault: String? = null,
+
+    @field:SerializedName("back_gray") val backGray: String? = null,
+
+    @field:SerializedName("front_default") val frontDefault: String? = null,
+
+    @field:SerializedName("front_transparent") val frontTransparent: String? = null
+)
+
+data class Ability(
+
+    @field:SerializedName("name") val name: String? = null,
+
+    @field:SerializedName("url") val url: String? = null
+)
+
+data class PastTypesItem(
+
+    @field:SerializedName("generation") val generation: Generation? = null,
+
+    @field:SerializedName("types") val types: List<TypesItem?>? = null
+)
+
+data class OfficialArtwork(
+
+    @field:SerializedName("front_default") val frontDefault: String? = null
+)
+
+data class Species(
+
+    @field:SerializedName("name") val name: String? = null,
+
+    @field:SerializedName("url") val url: String? = null
+)
+
+data class GenerationIv(
+
+    @field:SerializedName("platinum") val platinum: Platinum? = null,
+
+    @field:SerializedName("diamond-pearl") val diamondPearl: DiamondPearl? = null,
+
+    @field:SerializedName("heartgold-soulsilver") val heartgoldSoulsilver: HeartgoldSoulsilver? = null
+)

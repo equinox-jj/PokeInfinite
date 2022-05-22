@@ -5,4 +5,5 @@
     <string name="retry">Retry</string>
     <string name="error_loading_data">Error Loading Data</string>
     <string name="can_t_load_any_results">Can\'t Load Any Results</string>
+    <string name="image_pokemon">Image Pokemon</string>
 </resources>
