@@ -40,21 +40,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 footer = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() }
             )
             btnErrorLoad.setOnClickListener { mPokemonPagingAdapter.retry() }
-        }
-        mPokemonPagingAdapter.addLoadStateListener { loadState ->
-            binding.apply {
+
+            mPokemonPagingAdapter.addLoadStateListener { loadState ->
+                pbPokemonList.isVisible = loadState.source.refresh is LoadState.Loading
                 tvErrorLoad.isVisible = loadState.source.refresh is LoadState.Error
                 btnErrorLoad.isVisible = loadState.source.refresh is LoadState.Error
-//                tvErrorLoad.isVisible = loadState.source.refresh is LoadState.Loading
-
-//                if (loadState.source.refresh is LoadState.NotLoading &&
-//                    loadState.append.endOfPaginationReached &&
-//                    mPokemonPagingAdapter.itemCount < 1
-//                ) {
-//                    rvPokemonList.isVisible = false
-//                } else {
-//                textViewEmpty.isVisible = false
-//                }
             }
 
         }

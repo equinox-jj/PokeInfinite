@@ -3,9 +3,12 @@ package com.pokeinfinite.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.pokeinfinite.data.ApiResource
 import com.pokeinfinite.data.model.PokemonResult
+import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.data.source.remote.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PokemonRepositoryImpl @Inject constructor(
@@ -16,5 +19,11 @@ class PokemonRepositoryImpl @Inject constructor(
         config = PagingConfig(enablePlaceholders = false, pageSize = 20),
         pagingSourceFactory = { remoteDataSource.getPokemonPagingSource() }
     ).flow
+
+    override fun getPokemonDetail(queryName: String): Flow<ApiResource<SinglePokemonResponse>> =
+        flow {
+
+        }
+
 
 }

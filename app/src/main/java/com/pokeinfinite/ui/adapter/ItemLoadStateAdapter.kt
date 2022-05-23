@@ -22,8 +22,8 @@ class ItemLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<Ite
         fun bind(loadState: LoadState) {
             binding.apply {
                 pbLoadAdapter.isVisible = loadState is LoadState.Loading
-                btnLoadAdapter.isVisible = loadState !is LoadState.Loading
-                tvLoadAdapter.isVisible = loadState !is LoadState.Loading
+                btnLoadAdapter.isVisible = loadState is LoadState.Error
+                tvLoadAdapter.isVisible = loadState is LoadState.Error
             }
         }
     }
@@ -33,7 +33,8 @@ class ItemLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<Ite
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
-        val binding = ItemLoadStateAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemLoadStateAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LoadStateViewHolder(binding)
     }
 

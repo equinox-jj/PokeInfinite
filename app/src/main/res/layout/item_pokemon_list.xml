@@ -14,6 +14,7 @@
         android:id="@+id/cvPokemonList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:navigate_to_pokemon_detail="@{pokemonResults.name}"
         android:layout_margin="20dp"
         app:cardCornerRadius="25dp"
         app:cardElevation="15dp">
@@ -31,7 +32,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:pokemonPoster="@{pokemonResults.extractPokemonImage()}"
+                android:pokemon_poster="@{pokemonResults.extractPokemonImage()}"
                 tools:src="@tools:sample/avatars" />
 
             <TextView

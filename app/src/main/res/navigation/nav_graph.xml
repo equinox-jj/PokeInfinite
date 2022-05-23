@@ -21,7 +21,10 @@
         android:id="@+id/detailFragment"
         android:name="com.pokeinfinite.ui.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument android:name="pokemonName"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>
