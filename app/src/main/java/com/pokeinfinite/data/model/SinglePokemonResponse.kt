@@ -60,45 +60,43 @@ data class Gold(
 data class Other(
 
     @field:SerializedName("dream_world") val dreamWorld: DreamWorld? = null,
-
     @field:SerializedName("official-artwork") val officialArtwork: OfficialArtwork? = null,
-
     @field:SerializedName("home") val home: Home? = null
+
 )
 
 data class Type(
 
     @field:SerializedName("name") val name: String? = null,
-
     @field:SerializedName("url") val url: String? = null
 )
 
 data class Version(
 
     @field:SerializedName("name") val name: String? = null,
-
     @field:SerializedName("url") val url: String? = null
+
 )
 
 data class Stat(
 
     @field:SerializedName("name") val name: String? = null,
-
     @field:SerializedName("url") val url: String? = null
+
 )
 
 data class Emerald(
 
     @field:SerializedName("front_default") val frontDefault: String? = null,
-
     @field:SerializedName("front_shiny") val frontShiny: String? = null
+
 )
 
 data class TypesItem(
 
     @field:SerializedName("slot") val slot: Int? = null,
-
     @field:SerializedName("type") val type: Type? = null
+
 )
 
 data class Icons(
@@ -299,24 +297,16 @@ data class GenerationViii(
 data class Sprites(
 
     @field:SerializedName("back_shiny_female") val backShinyFemale: Any? = null,
-
     @field:SerializedName("back_female") val backFemale: Any? = null,
-
     @field:SerializedName("other") val other: Other? = null,
-
     @field:SerializedName("back_default") val backDefault: String? = null,
-
     @field:SerializedName("front_shiny_female") val frontShinyFemale: Any? = null,
-
     @field:SerializedName("front_default") val frontDefault: String? = null,
-
     @field:SerializedName("versions") val versions: Versions? = null,
-
     @field:SerializedName("front_female") val frontFemale: Any? = null,
-
     @field:SerializedName("back_shiny") val backShiny: String? = null,
-
     @field:SerializedName("front_shiny") val frontShiny: String? = null
+
 )
 
 data class AbilitiesItem(
@@ -524,7 +514,6 @@ data class PastTypesItem(
 )
 
 data class OfficialArtwork(
-
     @field:SerializedName("front_default") val frontDefault: String? = null
 )
 

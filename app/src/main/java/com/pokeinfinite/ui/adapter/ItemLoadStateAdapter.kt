@@ -24,6 +24,10 @@ class ItemLoadStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<Ite
                 pbLoadAdapter.isVisible = loadState is LoadState.Loading
                 btnLoadAdapter.isVisible = loadState is LoadState.Error
                 tvLoadAdapter.isVisible = loadState is LoadState.Error
+
+                if (loadState is LoadState.Error) {
+                    tvLoadAdapter.text = loadState.error.localizedMessage
+                }
             }
         }
     }

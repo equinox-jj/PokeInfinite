@@ -20,8 +20,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val mHomeViewModel by viewModels<HomeViewModel>()
-    private val mPokemonPagingAdapter by lazy { ItemPokemonPagingAdapter() }
+    private val viewModel by viewModels<HomeViewModel>()
+    private val adapter by lazy { ItemPokemonPagingAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,13 +35,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun initRecyclerView() {
         binding.apply {
             rvPokemonList.setHasFixedSize(true)
-            rvPokemonList.adapter = mPokemonPagingAdapter.withLoadStateHeaderAndFooter(
-                header = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() },
-                footer = ItemLoadStateAdapter { mPokemonPagingAdapter.retry() }
+            rvPokemonList.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = ItemLoadStateAdapter { adapter.retry() },
+                footer = ItemLoadStateAdapter { adapter.retry() }
             )
-            btnErrorLoad.setOnClickListener { mPokemonPagingAdapter.retry() }
+            btnErrorLoad.setOnClickListener { adapter.retry() }
 
-            mPokemonPagingAdapter.addLoadStateListener { loadState ->
+            adapter.addLoadStateListener { loadState ->
                 pbPokemonList.isVisible = loadState.source.refresh is LoadState.Loading
                 tvErrorLoad.isVisible = loadState.source.refresh is LoadState.Error
                 btnErrorLoad.isVisible = loadState.source.refresh is LoadState.Error
@@ -53,7 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
-            mHomeViewModel.pokemonPaging.collect { mPokemonPagingAdapter.submitData(it) }
+            viewModel.pokemonPaging.collect { adapter.submitData(it) }
         }
     }
 

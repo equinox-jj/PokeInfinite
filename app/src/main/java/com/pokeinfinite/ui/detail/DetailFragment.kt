@@ -1,29 +1,52 @@
 package com.pokeinfinite.ui.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import coil.load
+import com.pokeinfinite.R
+import com.pokeinfinite.data.ApiResource
+import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
+    private val viewModel by viewModels<DetailViewModel>()
+    private val args by navArgs<DetailFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentDetailBinding.bind(view)
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        val pokemonName: String = args.pokemonName
+        viewModel.getPokemonPagingSource(pokemonName)
+        viewModel.pokemonDetailResponse.observe(viewLifecycleOwner) { pokemonDetail ->
+            when (pokemonDetail) {
+                is ApiResource.Loading -> {}
+                is ApiResource.Success -> { pokemonDetail.data?.let { initView(it) } }
+                is ApiResource.Error -> {}
+            }
+        }
+    }
+
+    private fun initView(data: SinglePokemonResponse) {
+        binding.apply {
+            val pokemonImage = data.sprites?.other?.officialArtwork?.frontDefault
+            ivDetailPokemon.load(pokemonImage) {
+                crossfade(200)
+            }
+            tvDetailPokemonName.text = data.name
+        }
     }
 
     override fun onDestroyView() {

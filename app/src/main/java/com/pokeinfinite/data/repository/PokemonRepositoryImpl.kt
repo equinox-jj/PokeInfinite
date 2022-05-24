@@ -33,6 +33,7 @@ class PokemonRepositoryImpl @Inject constructor(
                 is ApiResponse.Error -> {
                     emit(ApiResource.Error(response.errorMessage))
                 }
+                is ApiResponse.Empty -> {}
             }
         }
 
