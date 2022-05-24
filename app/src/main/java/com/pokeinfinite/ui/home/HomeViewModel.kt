@@ -14,16 +14,4 @@ class HomeViewModel @Inject constructor(
 
     val pokemonPaging = repository.getPokemonPaging().cachedIn(viewModelScope)
 
-//    private val _pokemonPagingData = MutableLiveData<PagingData<PokemonResponse.PokemonResult>>()
-//    val pokemonPagingData: LiveData<PagingData<PokemonResponse.PokemonResult>> get() = _pokemonPagingData
-
-//    fun getPokemonPagingSource() {
-//        viewModelScope.launch {
-//            repository.getPokemonPaging()
-//                .collectLatest {
-//                    _pokemonPagingData.value = it
-//                }
-//        }
-//    }
-
 }

@@ -24,7 +24,7 @@ class BindingAdapter {
         @BindingAdapter("android:pokemon_poster")
         @JvmStatic
         fun backdropPath(view: ImageView, url: String) {
-            view.load(url) {
+            view.load(extractPokemonImage(url)) {
                 crossfade(200)
                 error(R.drawable.ic_launcher_foreground)
             }

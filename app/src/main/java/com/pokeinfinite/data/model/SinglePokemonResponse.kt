@@ -17,8 +17,8 @@ data class SinglePokemonResponse(
     @field:SerializedName("species") val species: Species? = null,
     @field:SerializedName("stats") val stats: List<StatsItem?>? = null,
     @field:SerializedName("moves") val moves: List<MovesItem?>? = null,
-    @field:SerializedName("name") val name: String? = null,
-    @field:SerializedName("id") val id: Int? = null,
+    @field:SerializedName("name") val name: String,
+    @field:SerializedName("id") val id: Int,
     @field:SerializedName("forms") val forms: List<FormsItem?>? = null,
     @field:SerializedName("height") val height: Int? = null,
     @field:SerializedName("order") val order: Int? = null
@@ -28,20 +28,14 @@ data class SinglePokemonResponse(
 data class Versions(
 
     @field:SerializedName("generation-iii") val generationIii: GenerationIii? = null,
-
     @field:SerializedName("generation-ii") val generationIi: GenerationIi? = null,
-
     @field:SerializedName("generation-v") val generationV: GenerationV? = null,
-
     @field:SerializedName("generation-iv") val generationIv: GenerationIv? = null,
-
     @field:SerializedName("generation-vii") val generationVii: GenerationVii? = null,
-
     @field:SerializedName("generation-i") val generationI: GenerationI? = null,
-
     @field:SerializedName("generation-viii") val generationViii: GenerationViii? = null,
-
     @field:SerializedName("generation-vi") val generationVi: GenerationVi? = null
+
 )
 
 data class Gold(

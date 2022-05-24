@@ -32,7 +32,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:pokemon_poster="@{pokemonResults.extractPokemonImage()}"
+                android:pokemon_poster="@{pokemonResults.url}"
                 tools:src="@tools:sample/avatars" />
 
             <TextView

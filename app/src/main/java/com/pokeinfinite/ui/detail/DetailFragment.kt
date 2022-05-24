@@ -10,6 +10,7 @@ import com.pokeinfinite.R
 import com.pokeinfinite.data.ApiResource
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.databinding.FragmentDetailBinding
+import com.pokeinfinite.utils.formatId
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,6 +46,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             ivDetailPokemon.load(pokemonImage) {
                 crossfade(200)
             }
+            tvDetailPokemonNumber.text = formatId(data.id)
             tvDetailPokemonName.text = data.name
         }
     }
