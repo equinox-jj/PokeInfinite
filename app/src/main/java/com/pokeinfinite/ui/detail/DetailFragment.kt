@@ -2,6 +2,7 @@ package com.pokeinfinite.ui.detail
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -11,7 +12,6 @@ import com.pokeinfinite.data.ApiResource
 import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.databinding.FragmentDetailBinding
-import com.pokeinfinite.utils.formatId
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,7 +48,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             when (pokemonDetail) {
                 is ApiResource.Loading -> {}
                 is ApiResource.Success -> {
-                    pokemonDetail.data?.let { initPokeDesc(it) }
+                    pokemonDetail.data?.let { initPokeSpecies(it) }
                 }
                 is ApiResource.Error -> {}
             }
@@ -58,24 +58,34 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private fun initViewDetail(data: SinglePokemonResponse) {
         binding.apply {
             val pokemonImage = data.sprites?.other?.officialArtwork?.frontDefault
-            ivDetailPokemon.load(pokemonImage) {
-                crossfade(200)
-                error(R.drawable.ic_launcher_foreground)
-            }
-            tvDetailPokemonNumber.text = formatId(data.id)
+
+            loadImage(ivDetailPokemon, pokemonImage)
+            tvDetailPokemonNumber.text = getString(R.string.pokemon_number_format, data.id)
             tvDetailPokemonName.text = data.name
+            tvDetailBaseXp.text = data.baseExperience.toString()
+            tvDetailHeight.text = getString(R.string.pokemon_format_height, (data.height.times(10)))
+            tvDetailWeight.text = getString(R.string.pokemon_format_weight, (data.weight.div(10.0)))
+
         }
     }
 
-    private fun initPokeDesc(data: PokemonSpeciesResponse) {
+    private fun initPokeSpecies(data: PokemonSpeciesResponse) {
         binding.apply {
             var flavorText = data.flavorTextEntries[1].flavorText
             flavorText = flavorText.replace("POKéMON", "Pokémon")
             flavorText = flavorText.replace("\n", " ")
+
             tvDetailPokemonDesc.text = flavorText
+            tvDetailCatchRate.text = data.captureRate.toString()
         }
     }
 
+    private fun loadImage(image: ImageView, url: String?) {
+        image.load(url) {
+            crossfade(200)
+            error(R.drawable.ic_launcher_foreground)
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

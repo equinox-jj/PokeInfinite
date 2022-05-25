@@ -20,7 +20,7 @@ data class PokemonSpeciesResponse(
 	val eggGroups: List<EggGroupsItem?>? = null,
 
 	@field:SerializedName("capture_rate")
-	val captureRate: Int? = null,
+	val captureRate: Int,
 
 	@field:SerializedName("pokedex_numbers")
 	val pokedexNumbers: List<PokedexNumbersItem?>? = null,

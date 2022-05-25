@@ -14,8 +14,8 @@
         android:id="@+id/cvPokemonList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:navigate_to_pokemon_detail="@{pokemonResults.name}"
         android:layout_margin="20dp"
+        android:navigate_to_pokemon_detail="@{pokemonResults.name}"
         app:cardCornerRadius="25dp"
         app:cardElevation="15dp">
 
@@ -28,12 +28,21 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:contentDescription="@string/image_pokemon"
+                android:palette_card="@{cvPokemonList}"
+                android:palette_image="@{pokemonResults.url}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:pokemon_poster="@{pokemonResults.url}"
                 tools:src="@tools:sample/avatars" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:background="@drawable/ic_pokemon_shadow_bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/tvPokemonList"
@@ -44,13 +53,14 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
+                android:text="@{pokemonResults.name}"
+                android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/ivPokemonList"
                 app:layout_constraintStart_toStartOf="@+id/ivPokemonList"
                 app:layout_constraintTop_toBottomOf="@+id/ivPokemonList"
-                android:text="@{pokemonResults.name}"
                 tools:text="Lorem Ipsum" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,5 +10,13 @@
     <string name="description">Description</string>
     <string name="basic_info">Basic Info</string>
     <string name="stats">Stats</string>
+    <string name="base_xp">Base XP</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="catch_rate">Catch Rate</string>
+
+    <string name="pokemon_number_format">#%03d</string>
+    <string name="pokemon_format_weight">%.1f kg</string>
+    <string name="pokemon_format_height">%d cm</string>
 
 </resources>
