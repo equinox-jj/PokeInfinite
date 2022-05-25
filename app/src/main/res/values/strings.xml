@@ -8,5 +8,7 @@
     <string name="image_pokemon">Image Pokemon</string>
     <string name="image_pokemon_detail">Image Pokemon Detail</string>
     <string name="description">Description</string>
+    <string name="basic_info">Basic Info</string>
+    <string name="stats">Stats</string>
 
 </resources>

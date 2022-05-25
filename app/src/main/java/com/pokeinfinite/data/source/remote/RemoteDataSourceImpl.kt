@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.pokeinfinite.data.ApiResponse
 import com.pokeinfinite.data.model.PokemonResult
-import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.data.network.ApiService
 import com.pokeinfinite.utils.Constants.LIMIT
@@ -58,17 +57,6 @@ class RemoteDataSourceImpl @Inject constructor(
         return flow {
             try {
                 val response = apiService.getSinglePokemonResponse(queryName)
-                emit(ApiResponse.Success(response))
-            } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-    }
-
-    override fun getPokemonSpecies(queryName: String): Flow<ApiResponse<PokemonSpeciesResponse>> {
-        return flow {
-            try {
-                val response = apiService.getPokemonSpeciesResponse(queryName)
                 emit(ApiResponse.Success(response))
             } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))

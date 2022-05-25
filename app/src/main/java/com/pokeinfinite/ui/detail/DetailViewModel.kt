@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pokeinfinite.data.ApiResource
-import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.data.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,10 +22,6 @@ class DetailViewModel @Inject constructor(
     val pokemonDetailResponse: LiveData<ApiResource<SinglePokemonResponse>>
         get() = _pokemonDetailResponse
 
-    private val _pokemonSpeciesResponse = MutableLiveData<ApiResource<PokemonSpeciesResponse>>()
-    val pokemonSpeciesResponse: LiveData<ApiResource<PokemonSpeciesResponse>>
-        get() = _pokemonSpeciesResponse
-
     fun getPokemonDetail(queryName: String) {
         viewModelScope.launch {
             repository.getPokemonDetail(queryName)
@@ -38,21 +33,6 @@ class DetailViewModel @Inject constructor(
                 }
                 .collect {
                     _pokemonDetailResponse.value = it
-                }
-        }
-    }
-
-    fun getPokemonSpecies(queryName: String) {
-        viewModelScope.launch {
-            repository.getPokemonSpecies(queryName)
-                .onStart {
-
-                }
-                .catch {
-
-                }
-                .collect {
-                    _pokemonSpeciesResponse.value = it
                 }
         }
     }

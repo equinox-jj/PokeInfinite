@@ -12,9 +12,9 @@ class ItemPokemonStatsAdapter : RecyclerView.Adapter<ItemPokemonStatsAdapter.Sta
 
     inner class StatViewHolder(private val binding: ItemPokemonStatsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(statsItem: StatsItem) {
+        fun bind(statsItem: StatsItem) {
 
-            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StatViewHolder {
@@ -28,4 +28,5 @@ class ItemPokemonStatsAdapter : RecyclerView.Adapter<ItemPokemonStatsAdapter.Sta
     }
 
     override fun getItemCount(): Int = statsResult.size
+
 }

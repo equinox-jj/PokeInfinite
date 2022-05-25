@@ -6,7 +6,6 @@ import androidx.paging.PagingData
 import com.pokeinfinite.data.ApiResource
 import com.pokeinfinite.data.ApiResponse
 import com.pokeinfinite.data.model.PokemonResult
-import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.data.source.remote.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
@@ -27,21 +26,6 @@ class PokemonRepositoryImpl @Inject constructor(
         flow {
             emit(ApiResource.Loading())
             when (val response = remoteDataSource.getPokemonDetail(queryName).first()) {
-                is ApiResponse.Success -> {
-                    val data = response.data
-                    emit(ApiResource.Success(data))
-                }
-                is ApiResponse.Error -> {
-                    emit(ApiResource.Error(response.errorMessage))
-                }
-                is ApiResponse.Empty -> {}
-            }
-        }
-
-    override fun getPokemonSpecies(queryName: String): Flow<ApiResource<PokemonSpeciesResponse>> =
-        flow {
-            emit(ApiResource.Loading())
-            when (val response = remoteDataSource.getPokemonSpecies(queryName).first()) {
                 is ApiResponse.Success -> {
                     val data = response.data
                     emit(ApiResource.Success(data))

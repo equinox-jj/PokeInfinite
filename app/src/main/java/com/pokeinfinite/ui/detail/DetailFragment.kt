@@ -8,7 +8,6 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.pokeinfinite.R
 import com.pokeinfinite.data.ApiResource
-import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.databinding.FragmentDetailBinding
 import com.pokeinfinite.utils.formatId
@@ -27,6 +26,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailBinding.bind(view)
         initViewModel()
+        initRecycler()
+    }
+
+    private fun initRecycler() {
+        binding.apply {
+//            rvDetailPokemonDesc.adapter = descAdapter
+//            rvDetailPokemonDesc.setHasFixedSize(true)
+        }
     }
 
     private fun initViewModel() {
@@ -36,16 +43,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.pokemonDetailResponse.observe(viewLifecycleOwner) { pokemonDetail ->
             when (pokemonDetail) {
                 is ApiResource.Loading -> {}
-                is ApiResource.Success -> { pokemonDetail.data?.let { initViewDetail(it) } }
-                is ApiResource.Error -> {}
-            }
-        }
-
-        viewModel.getPokemonSpecies(pokemonName)
-        viewModel.pokemonSpeciesResponse.observe(viewLifecycleOwner) { pokemonDetail ->
-            when (pokemonDetail) {
-                is ApiResource.Loading -> {}
-                is ApiResource.Success -> { pokemonDetail.data?.let { initViewSpecies(it) } }
+                is ApiResource.Success -> {
+                    pokemonDetail.data?.let { initViewDetail(it) }
+                }
                 is ApiResource.Error -> {}
             }
         }
@@ -63,11 +63,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
-    private fun initViewSpecies(data: PokemonSpeciesResponse) {
-        binding.apply {
-
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

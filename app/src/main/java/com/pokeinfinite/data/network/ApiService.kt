@@ -1,7 +1,6 @@
 package com.pokeinfinite.data.network
 
 import com.pokeinfinite.data.model.PokemonResponse
-import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.utils.Constants.QUERY_LIMIT
 import com.pokeinfinite.utils.Constants.QUERY_OFFSET
@@ -22,10 +21,5 @@ interface ApiService {
     suspend fun getSinglePokemonResponse(
         @Path(QUERY_POKEMON_NAME) queryName: String
     ): SinglePokemonResponse
-
-    @GET("pokemon-species/{name}")
-    suspend fun getPokemonSpeciesResponse(
-        @Path(QUERY_POKEMON_NAME) queryName: String
-    ): PokemonSpeciesResponse
 
 }
