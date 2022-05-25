@@ -8,7 +8,7 @@ import com.pokeinfinite.databinding.ItemPokemonStatsBinding
 
 class ItemPokemonStatsAdapter : RecyclerView.Adapter<ItemPokemonStatsAdapter.StatViewHolder>() {
 
-    private val statsResult = emptyList<StatsItem>()
+    private var statsResult = emptyList<StatsItem>()
 
     inner class StatViewHolder(private val binding: ItemPokemonStatsBinding) :
         RecyclerView.ViewHolder(binding.root) {

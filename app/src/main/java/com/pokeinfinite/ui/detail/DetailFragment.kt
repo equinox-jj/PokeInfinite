@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.pokeinfinite.R
 import com.pokeinfinite.data.ApiResource
+import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.databinding.FragmentDetailBinding
 import com.pokeinfinite.utils.formatId
@@ -26,14 +27,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailBinding.bind(view)
         initViewModel()
-        initRecycler()
-    }
-
-    private fun initRecycler() {
-        binding.apply {
-//            rvDetailPokemonDesc.adapter = descAdapter
-//            rvDetailPokemonDesc.setHasFixedSize(true)
-        }
     }
 
     private fun initViewModel() {
@@ -49,6 +42,17 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 is ApiResource.Error -> {}
             }
         }
+
+        viewModel.getPokemonDescription(pokemonName)
+        viewModel.pokemonDescription.observe(viewLifecycleOwner) { pokemonDetail ->
+            when (pokemonDetail) {
+                is ApiResource.Loading -> {}
+                is ApiResource.Success -> {
+                    pokemonDetail.data?.let { initPokeDesc(it) }
+                }
+                is ApiResource.Error -> {}
+            }
+        }
     }
 
     private fun initViewDetail(data: SinglePokemonResponse) {
@@ -60,6 +64,15 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             }
             tvDetailPokemonNumber.text = formatId(data.id)
             tvDetailPokemonName.text = data.name
+        }
+    }
+
+    private fun initPokeDesc(data: PokemonSpeciesResponse) {
+        binding.apply {
+            var flavorText = data.flavorTextEntries[1].flavorText
+            flavorText = flavorText.replace("POKéMON", "Pokémon")
+            flavorText = flavorText.replace("\n", " ")
+            tvDetailPokemonDesc.text = flavorText
         }
     }
 
