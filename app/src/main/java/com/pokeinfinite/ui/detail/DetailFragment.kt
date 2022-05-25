@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.pokeinfinite.R
 import com.pokeinfinite.data.ApiResource
+import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.databinding.FragmentDetailBinding
 import com.pokeinfinite.utils.formatId
@@ -30,24 +31,41 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private fun initViewModel() {
         val pokemonName: String = args.pokemonName
-        viewModel.getPokemonPagingSource(pokemonName)
+
+        viewModel.getPokemonDetail(pokemonName)
         viewModel.pokemonDetailResponse.observe(viewLifecycleOwner) { pokemonDetail ->
             when (pokemonDetail) {
                 is ApiResource.Loading -> {}
-                is ApiResource.Success -> { pokemonDetail.data?.let { initView(it) } }
+                is ApiResource.Success -> { pokemonDetail.data?.let { initViewDetail(it) } }
+                is ApiResource.Error -> {}
+            }
+        }
+
+        viewModel.getPokemonSpecies(pokemonName)
+        viewModel.pokemonSpeciesResponse.observe(viewLifecycleOwner) { pokemonDetail ->
+            when (pokemonDetail) {
+                is ApiResource.Loading -> {}
+                is ApiResource.Success -> { pokemonDetail.data?.let { initViewSpecies(it) } }
                 is ApiResource.Error -> {}
             }
         }
     }
 
-    private fun initView(data: SinglePokemonResponse) {
+    private fun initViewDetail(data: SinglePokemonResponse) {
         binding.apply {
             val pokemonImage = data.sprites?.other?.officialArtwork?.frontDefault
             ivDetailPokemon.load(pokemonImage) {
                 crossfade(200)
+                error(R.drawable.ic_launcher_foreground)
             }
             tvDetailPokemonNumber.text = formatId(data.id)
             tvDetailPokemonName.text = data.name
+        }
+    }
+
+    private fun initViewSpecies(data: PokemonSpeciesResponse) {
+        binding.apply {
+
         }
     }
 

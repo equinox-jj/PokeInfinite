@@ -7,5 +7,6 @@
     <string name="can_t_load_any_results">Can\'t Load Any Results</string>
     <string name="image_pokemon">Image Pokemon</string>
     <string name="image_pokemon_detail">Image Pokemon Detail</string>
+    <string name="description">Description</string>
 
 </resources>
