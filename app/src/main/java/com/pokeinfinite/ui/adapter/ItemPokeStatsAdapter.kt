@@ -2,9 +2,12 @@ package com.pokeinfinite.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.data.model.StatsItem
 import com.pokeinfinite.databinding.ItemPokemonStatsBinding
+import com.pokeinfinite.utils.DiffUtils
 
 class ItemPokeStatsAdapter : RecyclerView.Adapter<ItemPokeStatsAdapter.StatViewHolder>() {
 
@@ -28,5 +31,12 @@ class ItemPokeStatsAdapter : RecyclerView.Adapter<ItemPokeStatsAdapter.StatViewH
     }
 
     override fun getItemCount(): Int = statsResult.size
+
+    fun statsDiffUtil(newData: SinglePokemonResponse) {
+        val statsDiffUtil = DiffUtils(statsResult, newData.stats)
+        val diffUtilResult = DiffUtil.calculateDiff(statsDiffUtil)
+        statsResult = newData.stats
+        diffUtilResult.dispatchUpdatesTo(this)
+    }
 
 }

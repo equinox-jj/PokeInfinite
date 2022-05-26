@@ -68,11 +68,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             val pokemonImage = data.sprites?.other?.officialArtwork?.frontDefault
 
             setBackgroundPalette(ivDetailPokemon, pokemonImage, shapeImageDetail)
+
             tvDetailPokemonNumber.text = getString(R.string.pokemon_number_format, data.id)
             tvDetailPokemonName.text = data.name.replaceFirstChar { it.uppercase() }
+
             tvDetailBaseXp.text = data.baseExperience.toString()
             tvDetailHeight.text = getString(R.string.pokemon_format_height, (data.height.times(10)))
             tvDetailWeight.text = getString(R.string.pokemon_format_weight, (data.weight.div(10.0)))
+
             tvDetailPokemonTypeOne.text = data.types[0].type.name
             setPokemonTypes(data.types)
         }
@@ -123,13 +126,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             } else {
                 tvDetailPokemonTypeTwo.visibility = View.GONE
             }
-        }
-    }
-
-    private fun loadImage(image: ImageView, url: String?) {
-        image.load(url) {
-            crossfade(200)
-            error(R.drawable.ic_launcher_foreground)
         }
     }
 
