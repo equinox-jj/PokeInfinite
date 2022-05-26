@@ -22,15 +22,6 @@ class BindingAdapter {
             }
         }
 
-        @BindingAdapter("android:detail_image_poke")
-        @JvmStatic
-        fun detailPokeImage(image: ImageView, url: String?) {
-            image.load(url) {
-                crossfade(200)
-                error(R.drawable.ic_launcher_foreground)
-            }
-        }
-
         @BindingAdapter("android:palette_image", "android:palette_card")
         @JvmStatic
         fun homePokeImagePalette(view: ImageView, url: String, paletteCard: MaterialCardView) {
@@ -50,6 +41,15 @@ class BindingAdapter {
                 )
             }
         }
+
+//        @BindingAdapter("android:detail_image_poke")
+//        @JvmStatic
+//        fun detailPokeImage(image: ImageView, url: String?) {
+//            image.load(url) {
+//                crossfade(200)
+//                error(R.drawable.ic_launcher_foreground)
+//            }
+//        }
 
 //        @BindingAdapter("android:pokemon_poster")
 //        @JvmStatic

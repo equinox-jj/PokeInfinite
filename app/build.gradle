@@ -93,4 +93,7 @@ dependencies {
 
     // Utils
     implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // Rainbow
+    implementation "com.github.skydoves:rainbow:1.0.3"
 }
