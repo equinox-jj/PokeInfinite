@@ -53,7 +53,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="@{pokemonResults.name}"
+                android:lower_to_upper="@{pokemonResults}"
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold"

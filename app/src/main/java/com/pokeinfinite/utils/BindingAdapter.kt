@@ -1,6 +1,7 @@
 package com.pokeinfinite.utils
 
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.BindingAdapter
 import androidx.navigation.findNavController
@@ -8,6 +9,7 @@ import androidx.palette.graphics.Palette
 import coil.load
 import com.google.android.material.card.MaterialCardView
 import com.pokeinfinite.R
+import com.pokeinfinite.data.model.PokemonResult
 import com.pokeinfinite.ui.home.HomeFragmentDirections
 
 class BindingAdapter {
@@ -40,6 +42,12 @@ class BindingAdapter {
                     }
                 )
             }
+        }
+
+        @BindingAdapter("android:lower_to_upper")
+        @JvmStatic
+        fun homeLowerToUpperCase(view: TextView, data: PokemonResult) {
+            view.text = data.name.replaceFirstChar { it.uppercase() }
         }
 
 //        @BindingAdapter("android:detail_image_poke")
