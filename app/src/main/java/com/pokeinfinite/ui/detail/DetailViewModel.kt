@@ -23,36 +23,45 @@ class DetailViewModel @Inject constructor(
     val pokemonDetailResponse: LiveData<ApiResource<SinglePokemonResponse>>
         get() = _pokemonDetailResponse
 
-    private val _pokemonDescription = MutableLiveData<ApiResource<PokemonSpeciesResponse>>()
-    val pokemonDescription: LiveData<ApiResource<PokemonSpeciesResponse>>
-        get() = _pokemonDescription
+    private val _pokemonSpeciesResponse = MutableLiveData<ApiResource<PokemonSpeciesResponse>>()
+    val pokemonSpeciesResponse: LiveData<ApiResource<PokemonSpeciesResponse>>
+        get() = _pokemonSpeciesResponse
 
     fun getPokemonDetail(queryName: String) {
         viewModelScope.launch {
             repository.getPokemonDetail(queryName)
                 .onStart {
-
+                    _pokemonDetailResponse.postValue(ApiResource.Loading())
                 }
-                .catch {
-
+                .catch { error ->
+                    error.message?.let { message ->
+                        _pokemonDetailResponse.postValue(ApiResource.Error(message))
+                    }
                 }
-                .collect {
-                    _pokemonDetailResponse.value = it
+                .collect { pokeDetail ->
+                    pokeDetail.data?.let {
+                        _pokemonDetailResponse.postValue(ApiResource.Success(it))
+                    }
                 }
         }
     }
 
-    fun getPokemonDescription(queryName: String) {
+    fun getPokemonSpecies(queryName: String) {
         viewModelScope.launch {
             repository.getPokemonSpecies(queryName)
                 .onStart {
+                    _pokemonSpeciesResponse.postValue(ApiResource.Loading())
+                }
+                .catch { error ->
+                    error.message?.let { message ->
+                        _pokemonSpeciesResponse.postValue(ApiResource.Error(message))
+                    }
 
                 }
-                .catch {
-
-                }
-                .collect {
-                    _pokemonDescription.value = it
+                .collect { pokeSpecies ->
+                    pokeSpecies.data?.let {
+                        _pokemonSpeciesResponse.postValue(ApiResource.Success(it))
+                    }
                 }
         }
     }

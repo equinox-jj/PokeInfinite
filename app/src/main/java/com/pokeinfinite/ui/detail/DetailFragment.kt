@@ -11,7 +11,9 @@ import com.pokeinfinite.R
 import com.pokeinfinite.data.ApiResource
 import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
+import com.pokeinfinite.data.model.TypesItem
 import com.pokeinfinite.databinding.FragmentDetailBinding
+import com.pokeinfinite.ui.adapter.ItemPokeStatsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,10 +24,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel by viewModels<DetailViewModel>()
     private val args by navArgs<DetailFragmentArgs>()
+    private val statsAdapter by lazy { ItemPokeStatsAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailBinding.bind(view)
+        binding.lifecycleOwner = this
+        binding.pokeDetail = viewModel
         initViewModel()
     }
 
@@ -37,14 +42,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             when (pokemonDetail) {
                 is ApiResource.Loading -> {}
                 is ApiResource.Success -> {
-                    pokemonDetail.data?.let { initViewDetail(it) }
+                    pokemonDetail.data?.let { initPokeDetail(it) }
                 }
                 is ApiResource.Error -> {}
             }
         }
 
-        viewModel.getPokemonDescription(pokemonName)
-        viewModel.pokemonDescription.observe(viewLifecycleOwner) { pokemonDetail ->
+        viewModel.getPokemonSpecies(pokemonName)
+        viewModel.pokemonSpeciesResponse.observe(viewLifecycleOwner) { pokemonDetail ->
             when (pokemonDetail) {
                 is ApiResource.Loading -> {}
                 is ApiResource.Success -> {
@@ -55,17 +60,18 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
-    private fun initViewDetail(data: SinglePokemonResponse) {
+    private fun initPokeDetail(data: SinglePokemonResponse) {
         binding.apply {
             val pokemonImage = data.sprites?.other?.officialArtwork?.frontDefault
 
-            loadImage(ivDetailPokemon, pokemonImage)
-            tvDetailPokemonNumber.text = getString(R.string.pokemon_number_format, data.id)
-            tvDetailPokemonName.text = data.name
+//            loadImage(ivDetailPokemon, pokemonImage)
+//            tvDetailPokemonNumber.text = getString(R.string.pokemon_number_format, data.id)
+            tvDetailPokemonName.text = data.name.replaceFirstChar { it.uppercase() }
             tvDetailBaseXp.text = data.baseExperience.toString()
             tvDetailHeight.text = getString(R.string.pokemon_format_height, (data.height.times(10)))
             tvDetailWeight.text = getString(R.string.pokemon_format_weight, (data.weight.div(10.0)))
-
+            tvDetailPokemonTypeOne.text = data.types[0].type.name
+            setPokemonTypes(data.types)
         }
     }
 
@@ -77,6 +83,17 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
             tvDetailPokemonDesc.text = flavorText
             tvDetailCatchRate.text = data.captureRate.toString()
+        }
+    }
+
+    private fun setPokemonTypes(types: List<TypesItem>) {
+        with(binding) {
+            if (types.size > 1) {
+                tvDetailPokemonTypeTwo.text = types[1].type.name
+                tvDetailPokemonTypeTwo.visibility = View.VISIBLE
+            } else {
+                tvDetailPokemonTypeTwo.visibility = View.GONE
+            }
         }
     }
 

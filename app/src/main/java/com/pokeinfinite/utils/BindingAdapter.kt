@@ -22,19 +22,18 @@ class BindingAdapter {
             }
         }
 
-
-//        @BindingAdapter("android:pokemon_poster")
-//        @JvmStatic
-//        fun backdropPath(view: ImageView, url: String) {
-//            view.load(extractPokemonImage(url)) {
-//                crossfade(200)
-//                error(R.drawable.ic_launcher_foreground)
-//            }
-//        }
+        @BindingAdapter("android:detail_image_poke")
+        @JvmStatic
+        fun detailPokeImage(image: ImageView, url: String?) {
+            image.load(url) {
+                crossfade(200)
+                error(R.drawable.ic_launcher_foreground)
+            }
+        }
 
         @BindingAdapter("android:palette_image", "android:palette_card")
         @JvmStatic
-        fun paletteColor(view: ImageView, url: String, paletteCard: MaterialCardView) {
+        fun homePokeImagePalette(view: ImageView, url: String, paletteCard: MaterialCardView) {
             view.load(extractPokemonImage(url)) {
                 allowHardware(false)
                 crossfade(200)
@@ -51,6 +50,58 @@ class BindingAdapter {
                 )
             }
         }
+
+//        @BindingAdapter("android:pokemon_poster")
+//        @JvmStatic
+//        fun backdropPath(view: ImageView, url: String) {
+//            view.load(extractPokemonImage(url)) {
+//                crossfade(200)
+//                error(R.drawable.ic_launcher_foreground)
+//            }
+//        }
+
+//        @JvmStatic
+//        @BindingAdapter("bindPokemonTypes")
+//        fun bindPokemonTypes(recyclerView: RecyclerView, types: List<TypesItem>?) {
+//            if (types != null) {
+//                recyclerView.clear()
+//                for (type in it) {
+//                    with(recyclerView) {
+//                        addRibbon(
+//                            ribbonView(context) {
+//                                setText(type.type.name)
+//                                setTextColor(Color.WHITE)
+//                                setPaddingLeft(84f)
+//                                setPaddingRight(84f)
+//                                setPaddingTop(2f)
+//                                setPaddingBottom(10f)
+//                                setTextSize(16f)
+//                                setRibbonRadius(120f)
+//                                setTextStyle(Typeface.BOLD)
+//                                setRibbonBackgroundColorResource(
+//                                    PokemonTypeUtils.getTypeColor(type.type.name)
+//                                )
+//                            }.apply {
+//                                maxLines = 1
+//                                gravity = Gravity.CENTER
+//                            }
+//                        )
+//                        addItemDecoration(SpacesItemDecoration())
+//                    }
+//                }
+//            }
+//        }
+
+//        @BindingAdapter("android:pokemon_type")
+//        @JvmStatic
+//        fun pokemonType(view: TextView, data: List<TypesItem>) {
+//            if (data.size > 3) {
+//                view.text = data[1].type.name
+//                view.visibility = View.VISIBLE
+//            } else {
+//                view.visibility = View.GONE
+//            }
+//        }
 
 
     }

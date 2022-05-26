@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pokeinfinite.data.model.StatsItem
 import com.pokeinfinite.databinding.ItemPokemonStatsBinding
 
-class ItemPokemonStatsAdapter : RecyclerView.Adapter<ItemPokemonStatsAdapter.StatViewHolder>() {
+class ItemPokeStatsAdapter : RecyclerView.Adapter<ItemPokeStatsAdapter.StatViewHolder>() {
 
     private var statsResult = emptyList<StatsItem>()
 

@@ -7,7 +7,7 @@ data class SinglePokemonResponse(
     @field:SerializedName("location_area_encounters") val locationAreaEncounters: String? = null,
     @field:SerializedName("types") val types: List<TypesItem>,
     @field:SerializedName("base_experience") val baseExperience: Int,
-    @field:SerializedName("held_items") val heldItems: List<HeldItemsItem?>? = null,
+    @field:SerializedName("held_items") val heldItems: List<HeldItemsItem>,
     @field:SerializedName("weight") val weight: Int,
     @field:SerializedName("is_default") val isDefault: Boolean? = null,
     @field:SerializedName("past_types") val pastTypes: List<PastTypesItem>,
@@ -86,7 +86,7 @@ data class Emerald(
 data class TypesItem(
 
     @field:SerializedName("slot") val slot: Int? = null,
-    @field:SerializedName("type") val type: Type? = null
+    @field:SerializedName("type") val type: Type
 
 )
 
