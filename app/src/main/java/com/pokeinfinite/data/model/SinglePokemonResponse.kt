@@ -58,7 +58,7 @@ data class Other(
 
 data class Type(
 
-    @field:SerializedName("name") val name: String? = null,
+    @field:SerializedName("name") val name: String?,
     @field:SerializedName("url") val url: String? = null
 )
 

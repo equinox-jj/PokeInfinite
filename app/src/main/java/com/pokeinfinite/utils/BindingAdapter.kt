@@ -1,6 +1,7 @@
 package com.pokeinfinite.utils
 
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.BindingAdapter
@@ -14,6 +15,7 @@ import com.pokeinfinite.data.model.StatsItem
 import com.pokeinfinite.ui.home.HomeFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class BindingAdapter {
@@ -57,14 +59,22 @@ class BindingAdapter {
         @BindingAdapter("android:stats_pokemon")
         @JvmStatic
         fun detailPokemonStats(view: TextView, data: StatsItem) {
+            view.text = data.baseStat.toString()
+        }
+
+        @BindingAdapter("android:stats_pokemon_progress")
+        @JvmStatic
+        fun detailPokemonStatsProgress(view: ProgressBar, data: StatsItem) {
+            view.secondaryProgress = 255
+            view.max = 255
             CoroutineScope(Dispatchers.Main).launch {
                 var state = 0
                 while (state <= data.baseStat) {
+                    view.progress = state
                     state++
+                    delay(10)
                 }
-
             }
-            view.text = data.stat.name
         }
 
 //        @BindingAdapter("android:detail_image_poke")
