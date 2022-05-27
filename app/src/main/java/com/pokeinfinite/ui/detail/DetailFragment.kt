@@ -13,9 +13,9 @@ import com.pokeinfinite.R
 import com.pokeinfinite.data.ApiResource
 import com.pokeinfinite.data.model.PokemonSpeciesResponse
 import com.pokeinfinite.data.model.SinglePokemonResponse
-import com.pokeinfinite.data.model.TypesItem
 import com.pokeinfinite.databinding.FragmentDetailBinding
 import com.pokeinfinite.ui.adapter.ItemPokeStatsAdapter
+import com.pokeinfinite.ui.adapter.ItemPokeTypesAdapter
 import com.skydoves.rainbow.Rainbow
 import com.skydoves.rainbow.RainbowOrientation
 import com.skydoves.rainbow.color
@@ -29,6 +29,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private val viewModel by viewModels<DetailViewModel>()
     private val args by navArgs<DetailFragmentArgs>()
+    private val typesAdapter by lazy { ItemPokeTypesAdapter() }
     private val statsAdapter by lazy { ItemPokeStatsAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +43,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         binding.apply {
             rvDetailPokemonStats.adapter = statsAdapter
             rvDetailPokemonStats.setHasFixedSize(true)
+            rvDetailPokemonTypes.adapter = typesAdapter
+            rvDetailPokemonTypes.setHasFixedSize(true)
         }
     }
 
@@ -83,10 +86,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             tvDetailHeight.text = getString(R.string.pokemon_format_height, (data.height.times(10)))
             tvDetailWeight.text = getString(R.string.pokemon_format_weight, (data.weight.div(10.0)))
 
-            tvDetailPokemonTypeOne.text = data.types[0].type.name
-            setPokemonTypes(data.types)
+//            tvDetailPokemonTypeOne.text = data.types[0].type.name
+//            setPokemonTypes(data.types)
 
             statsAdapter.statsDiffUtil(data)
+            typesAdapter.typesDiffUtil(data)
 
         }
     }
@@ -128,16 +132,16 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 
-    private fun setPokemonTypes(types: List<TypesItem>) {
-        with(binding) {
-            if (types.size > 1) {
-                tvDetailPokemonTypeTwo.text = types[1].type.name
-                tvDetailPokemonTypeTwo.visibility = View.VISIBLE
-            } else {
-                tvDetailPokemonTypeTwo.visibility = View.GONE
-            }
-        }
-    }
+//    private fun setPokemonTypes(types: List<TypesItem>) {
+//        with(binding) {
+//            if (types.size > 1) {
+//                tvDetailPokemonTypeTwo.text = types[1].type.name
+//                tvDetailPokemonTypeTwo.visibility = View.VISIBLE
+//            } else {
+//                tvDetailPokemonTypeTwo.visibility = View.GONE
+//            }
+//        }
+//    }
 
     private fun loadImage(image: ImageView, url: String?) {
         image.load(url) {

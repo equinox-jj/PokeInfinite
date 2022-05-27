@@ -17,6 +17,7 @@ class ItemPokeStatsAdapter : RecyclerView.Adapter<ItemPokeStatsAdapter.StatViewH
         RecyclerView.ViewHolder(binding.root) {
         fun bind(statsItem: StatsItem) {
             binding.pokeStats = statsItem
+            binding.tvStatsName.isSelected = true
         }
     }
 

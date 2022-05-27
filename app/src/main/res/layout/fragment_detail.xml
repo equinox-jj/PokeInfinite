@@ -71,37 +71,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/ivDetailPokemon"
                 tools:text="Lorem Ipsum" />
 
-            <TextView
-                android:id="@+id/tvDetailPokemonTypeOne"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDetailPokemonTypes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/ic_pokemon_types_round"
-                android:paddingHorizontal="15sp"
-                android:paddingVertical="4dp"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/tvDetailPokemonTypeTwo"
+                android:layout_margin="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/shapeImageDetail"
-                tools:text="Poison" />
-
-            <TextView
-                android:id="@+id/tvDetailPokemonTypeTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/ic_pokemon_types_round"
-                android:paddingHorizontal="15sp"
-                android:paddingVertical="4dp"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvDetailPokemonTypeOne"
-                app:layout_constraintTop_toBottomOf="@+id/shapeImageDetail"
-                tools:text="Poison" />
+                tools:listitem="@layout/item_pokemon_types" />
 
             <TextView
                 android:id="@+id/tvDesc"
@@ -113,7 +93,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDetailPokemonTypeOne" />
+                app:layout_constraintTop_toBottomOf="@+id/rvDetailPokemonTypes" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDesc"
@@ -298,8 +278,8 @@
                 android:id="@+id/rvDetailPokemonStats"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_margin="10dp"
+                android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -9,9 +9,11 @@ import androidx.navigation.findNavController
 import androidx.palette.graphics.Palette
 import coil.load
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
 import com.pokeinfinite.R
 import com.pokeinfinite.data.model.PokemonResult
 import com.pokeinfinite.data.model.StatsItem
+import com.pokeinfinite.data.model.TypesItem
 import com.pokeinfinite.ui.home.HomeFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -75,6 +77,13 @@ class BindingAdapter {
                     delay(10)
                 }
             }
+        }
+
+        @BindingAdapter("android:pokemon_types")
+        @JvmStatic
+        fun detailPokemonTypes(view: Chip, data: TypesItem) {
+
+
         }
 
 //        @BindingAdapter("android:detail_image_poke")
