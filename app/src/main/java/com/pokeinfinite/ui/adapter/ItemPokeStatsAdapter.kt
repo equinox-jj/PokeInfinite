@@ -16,7 +16,8 @@ class ItemPokeStatsAdapter : RecyclerView.Adapter<ItemPokeStatsAdapter.StatViewH
     inner class StatViewHolder(private val binding: ItemPokemonStatsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(statsItem: StatsItem) {
-
+            binding.pokeStats = statsItem
+            binding.executePendingBindings()
         }
     }
 

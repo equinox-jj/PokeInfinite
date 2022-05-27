@@ -71,8 +71,8 @@ data class Version(
 
 data class Stat(
 
-    @field:SerializedName("name") val name: String? = null,
-    @field:SerializedName("url") val url: String? = null
+    @field:SerializedName("name") val name: String,
+    @field:SerializedName("url") val url: String
 
 )
 
@@ -260,9 +260,9 @@ data class FormsItem(
 
 data class StatsItem(
 
-    @field:SerializedName("stat") val stat: Stat? = null,
-    @field:SerializedName("base_stat") val baseStat: Int? = null,
-    @field:SerializedName("effort") val effort: Int? = null
+    @field:SerializedName("stat") val stat: Stat,
+    @field:SerializedName("base_stat") val baseStat: Int,
+    @field:SerializedName("effort") val effort: Int
 )
 
 data class DiamondPearl(

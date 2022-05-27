@@ -35,6 +35,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailBinding.bind(view)
         initViewModel()
+        initRecycler()
+    }
+
+    private fun initRecycler() {
+        binding.apply {
+            rvDetailPokemonStats.adapter = statsAdapter
+            rvDetailPokemonStats.setHasFixedSize(true)
+        }
     }
 
     private fun initViewModel() {
@@ -77,6 +85,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
             tvDetailPokemonTypeOne.text = data.types[0].type.name
             setPokemonTypes(data.types)
+
+            statsAdapter.statsDiffUtil(data)
+
         }
     }
 

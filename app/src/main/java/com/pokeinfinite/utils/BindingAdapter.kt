@@ -10,7 +10,11 @@ import coil.load
 import com.google.android.material.card.MaterialCardView
 import com.pokeinfinite.R
 import com.pokeinfinite.data.model.PokemonResult
+import com.pokeinfinite.data.model.StatsItem
 import com.pokeinfinite.ui.home.HomeFragmentDirections
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class BindingAdapter {
     companion object {
@@ -48,6 +52,19 @@ class BindingAdapter {
         @JvmStatic
         fun homeLowerToUpperCase(view: TextView, data: PokemonResult) {
             view.text = data.name.replaceFirstChar { it.uppercase() }
+        }
+
+        @BindingAdapter("android:stats_pokemon")
+        @JvmStatic
+        fun detailPokemonStats(view: TextView, data: StatsItem) {
+            CoroutineScope(Dispatchers.Main).launch {
+                var state = 0
+                while (state <= data.baseStat) {
+                    state++
+                }
+
+            }
+            view.text = data.stat.name
         }
 
 //        @BindingAdapter("android:detail_image_poke")
