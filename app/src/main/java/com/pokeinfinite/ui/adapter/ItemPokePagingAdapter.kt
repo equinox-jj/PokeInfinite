@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pokeinfinite.data.model.PokemonResult
 import com.pokeinfinite.databinding.ItemPokemonListBinding
 
-class ItemPokemonPagingAdapter : PagingDataAdapter<PokemonResult, ItemPokemonPagingAdapter.PokemonViewHolder>(POKEMON_COMPARATOR) {
+class ItemPokePagingAdapter : PagingDataAdapter<PokemonResult, ItemPokePagingAdapter.PokemonViewHolder>(POKEMON_COMPARATOR) {
 
     inner class PokemonViewHolder(private val binding: ItemPokemonListBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -18,14 +18,14 @@ class ItemPokemonPagingAdapter : PagingDataAdapter<PokemonResult, ItemPokemonPag
         }
     }
 
-    override fun onBindViewHolder(holder: ItemPokemonPagingAdapter.PokemonViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemPokePagingAdapter.PokemonViewHolder, position: Int) {
         val currentPokemon = getItem(position)
         if (currentPokemon != null) {
             holder.bind(currentPokemon)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPokemonPagingAdapter.PokemonViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemPokePagingAdapter.PokemonViewHolder {
         val binding = ItemPokemonListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PokemonViewHolder(binding)
     }

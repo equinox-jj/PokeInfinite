@@ -399,7 +399,7 @@ data class Ability(
 data class PastTypesItem(
 
     @field:SerializedName("generation") val generation: Generation? = null,
-    @field:SerializedName("types") val types: List<TypesItem?>? = null
+    @field:SerializedName("types") val types: List<TypesItem>
 )
 
 data class OfficialArtwork(

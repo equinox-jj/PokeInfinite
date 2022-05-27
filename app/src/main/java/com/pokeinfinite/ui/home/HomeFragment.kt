@@ -10,7 +10,7 @@ import androidx.paging.LoadState
 import com.pokeinfinite.R
 import com.pokeinfinite.databinding.FragmentHomeBinding
 import com.pokeinfinite.ui.adapter.ItemLoadStateAdapter
-import com.pokeinfinite.ui.adapter.ItemPokemonPagingAdapter
+import com.pokeinfinite.ui.adapter.ItemPokePagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -21,7 +21,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<HomeViewModel>()
-    private val adapter by lazy { ItemPokemonPagingAdapter() }
+    private val adapter by lazy { ItemPokePagingAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
