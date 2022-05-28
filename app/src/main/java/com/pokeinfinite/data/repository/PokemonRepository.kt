@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface PokemonRepository {
 
     fun getPokemonPaging(): Flow<PagingData<PokemonResult>>
-    suspend fun getPokemonDetail(queryName: String): Flow<ApiResource<SinglePokemonResponse>>
-    suspend fun getPokemonSpecies(queryName: String): Flow<ApiResource<PokemonSpeciesResponse>>
+    fun getPokemonDetail(queryName: String): Flow<ApiResource<SinglePokemonResponse>>
+    fun getPokemonSpecies(queryName: String): Flow<ApiResource<PokemonSpeciesResponse>>
 
 }

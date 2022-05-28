@@ -10,6 +10,7 @@ import com.pokeinfinite.data.model.SinglePokemonResponse
 import com.pokeinfinite.data.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,7 +39,7 @@ class DetailViewModel @Inject constructor(
                         _pokemonDetailResponse.postValue(ApiResource.Error(message))
                     }
                 }
-                .collect { pokeDetail ->
+                .collectLatest { pokeDetail ->
                     pokeDetail.data?.let {
                         _pokemonDetailResponse.postValue(ApiResource.Success(it))
                     }
@@ -58,7 +59,7 @@ class DetailViewModel @Inject constructor(
                     }
 
                 }
-                .collect { pokeSpecies ->
+                .collectLatest { pokeSpecies ->
                     pokeSpecies.data?.let {
                         _pokemonSpeciesResponse.postValue(ApiResource.Success(it))
                     }

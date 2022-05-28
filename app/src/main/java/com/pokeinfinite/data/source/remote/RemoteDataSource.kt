@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface RemoteDataSource {
 
     fun getPokemonPagingSource(): PagingSource<Int, PokemonResult>
-    suspend fun getPokemonDetail(queryName: String): Flow<ApiResponse<SinglePokemonResponse>>
-    suspend fun getPokemonSpecies(queryName: String): Flow<ApiResponse<PokemonSpeciesResponse>>
+    fun getPokemonDetail(queryName: String): Flow<ApiResponse<SinglePokemonResponse>>
+    fun getPokemonSpecies(queryName: String): Flow<ApiResponse<PokemonSpeciesResponse>>
 
 }

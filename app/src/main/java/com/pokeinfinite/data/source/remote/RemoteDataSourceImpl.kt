@@ -54,7 +54,7 @@ class RemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun getPokemonDetail(queryName: String): Flow<ApiResponse<SinglePokemonResponse>> {
+    override fun getPokemonDetail(queryName: String): Flow<ApiResponse<SinglePokemonResponse>> {
         return flow {
             try {
                 val response = apiService.getSinglePokemonResponse(queryName)
@@ -65,7 +65,7 @@ class RemoteDataSourceImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun getPokemonSpecies(queryName: String): Flow<ApiResponse<PokemonSpeciesResponse>> {
+    override fun getPokemonSpecies(queryName: String): Flow<ApiResponse<PokemonSpeciesResponse>> {
         return flow {
             try {
                 val response = apiService.getPokemonSpeciesResponse(queryName)

@@ -58,8 +58,8 @@ data class Other(
 
 data class Type(
 
-    @field:SerializedName("name") val name: String?,
-    @field:SerializedName("url") val url: String? = null
+    @field:SerializedName("name") val name: String,
+    @field:SerializedName("url") val url: String
 )
 
 data class Version(
@@ -85,7 +85,7 @@ data class Emerald(
 
 data class TypesItem(
 
-    @field:SerializedName("slot") val slot: Int? = null,
+    @field:SerializedName("slot") val slot: Int,
     @field:SerializedName("type") val type: Type
 
 )

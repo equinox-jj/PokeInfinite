@@ -11,24 +11,26 @@
     <color name="shadow">#80000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="background">#403F3F</color>
+    <color name="card_background">#131361</color>
 
 
     <color name="fighting">#571919</color>
     <color name="flying">#571919</color>
-    <color name="poison">#571919</color>
+    <color name="poison">#781780</color>
     <color name="ground">#571919</color>
     <color name="rock">#571919</color>
-    <color name="bug">#571919</color>
+    <color name="bug">#683518</color>
     <color name="ghost">#571919</color>
     <color name="steel">#571919</color>
-    <color name="fire">#571919</color>
-    <color name="water">#571919</color>
-    <color name="grass">#571919</color>
-    <color name="electric">#571919</color>
+    <color name="fire">#FD3503</color>
+    <color name="water">#192E57</color>
+    <color name="grass">#429F10</color>
+    <color name="electric">#FFCA00</color>
     <color name="psychic">#571919</color>
-    <color name="ice">#571919</color>
+    <color name="ice">#00B7FF</color>
     <color name="dragon">#571919</color>
     <color name="fairy">#571919</color>
-    <color name="dark">#571919</color>
+    <color name="dark">#200606</color>
     <color name="another">#571919</color>
 </resources>

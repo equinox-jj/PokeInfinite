@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.pokeinfinite.ui.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="Pokemon List"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.pokeinfinite.ui.detail.DetailFragment"
-        android:label="fragment_detail"
+        android:label="Pokemon Detail"
         tools:layout="@layout/fragment_detail" >
         <argument android:name="pokemonName"
             app:argType="string" />

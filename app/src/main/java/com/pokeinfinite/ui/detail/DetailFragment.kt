@@ -40,11 +40,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun initRecycler() {
-        binding.apply {
-            rvDetailPokemonStats.adapter = statsAdapter
-            rvDetailPokemonStats.setHasFixedSize(true)
-            rvDetailPokemonTypes.adapter = typesAdapter
-            rvDetailPokemonTypes.setHasFixedSize(true)
+        binding.rvDetailPokemonStats.apply {
+            adapter = statsAdapter
+            setHasFixedSize(true)
+
+        }
+        binding.rvDetailPokemonTypes.apply {
+            adapter = typesAdapter
+            setHasFixedSize(true)
         }
     }
 
@@ -54,9 +57,24 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.getPokemonDetail(pokemonName)
         viewModel.pokemonDetailResponse.observe(viewLifecycleOwner) { pokemonDetail ->
             when (pokemonDetail) {
-                is ApiResource.Loading -> {}
+                is ApiResource.Loading -> {
+                    binding.rvDetailPokemonStats.visibility = View.GONE
+                    binding.rvDetailPokemonTypes.visibility = View.GONE
+                    binding.tvDesc.visibility = View.GONE
+                    binding.shapeImageDetail.visibility = View.GONE
+                    binding.tvDetailPokemonNumber.visibility = View.GONE
+                    binding.cardDesc.visibility = View.GONE
+                    binding.cardStats.visibility = View.GONE
+                }
                 is ApiResource.Success -> {
                     pokemonDetail.data?.let { initPokeDetail(it) }
+                    binding.rvDetailPokemonStats.visibility = View.VISIBLE
+                    binding.rvDetailPokemonTypes.visibility = View.VISIBLE
+                    binding.tvDesc.visibility = View.VISIBLE
+                    binding.shapeImageDetail.visibility = View.VISIBLE
+                    binding.tvDetailPokemonNumber.visibility = View.VISIBLE
+                    binding.cardDesc.visibility = View.VISIBLE
+                    binding.cardStats.visibility = View.VISIBLE
                 }
                 is ApiResource.Error -> {}
             }
@@ -85,9 +103,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             tvDetailBaseXp.text = data.baseExperience.toString()
             tvDetailHeight.text = getString(R.string.pokemon_format_height, (data.height.times(10)))
             tvDetailWeight.text = getString(R.string.pokemon_format_weight, (data.weight.div(10.0)))
-
-//            tvDetailPokemonTypeOne.text = data.types[0].type.name
-//            setPokemonTypes(data.types)
 
             statsAdapter.statsDiffUtil(data)
             typesAdapter.typesDiffUtil(data)
@@ -129,24 +144,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     }
                 }
             )
-        }
-    }
-
-//    private fun setPokemonTypes(types: List<TypesItem>) {
-//        with(binding) {
-//            if (types.size > 1) {
-//                tvDetailPokemonTypeTwo.text = types[1].type.name
-//                tvDetailPokemonTypeTwo.visibility = View.VISIBLE
-//            } else {
-//                tvDetailPokemonTypeTwo.visibility = View.GONE
-//            }
-//        }
-//    }
-
-    private fun loadImage(image: ImageView, url: String?) {
-        image.load(url) {
-            crossfade(200)
-            error(R.drawable.ic_launcher_foreground)
         }
     }
 

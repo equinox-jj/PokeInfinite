@@ -23,7 +23,7 @@ class PokemonRepositoryImpl @Inject constructor(
         pagingSourceFactory = { remoteDataSource.getPokemonPagingSource() }
     ).flow
 
-    override suspend fun getPokemonDetail(queryName: String): Flow<ApiResource<SinglePokemonResponse>> =
+    override fun getPokemonDetail(queryName: String): Flow<ApiResource<SinglePokemonResponse>> =
         flow {
             emit(ApiResource.Loading())
             when (val response = remoteDataSource.getPokemonDetail(queryName).first()) {
@@ -38,7 +38,7 @@ class PokemonRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getPokemonSpecies(queryName: String): Flow<ApiResource<PokemonSpeciesResponse>> =
+    override fun getPokemonSpecies(queryName: String): Flow<ApiResource<PokemonSpeciesResponse>> =
         flow {
             emit(ApiResource.Loading())
             when (val response = remoteDataSource.getPokemonSpecies(queryName).first()) {

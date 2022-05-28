@@ -19,134 +19,83 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 
-class BindingAdapter {
-    companion object {
+object BindingAdapter {
 
-        @BindingAdapter("android:navigate_to_pokemon_detail")
-        @JvmStatic
-        fun navigateMovieToDetail(view: MaterialCardView, pokemonId: String) {
-            view.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(pokemonId)
-                view.findNavController().navigate(action)
-            }
+    @BindingAdapter("android:navigate_to_pokemon_detail")
+    @JvmStatic
+    fun navigateMovieToDetail(view: MaterialCardView, pokemonId: String) {
+        view.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(pokemonId)
+            view.findNavController().navigate(action)
         }
+    }
 
-        @BindingAdapter("android:palette_image", "android:palette_card")
-        @JvmStatic
-        fun homePokeImagePalette(view: ImageView, url: String, paletteCard: MaterialCardView) {
-            view.load(extractPokemonImage(url)) {
-                allowHardware(false)
-                crossfade(200)
-                error(R.drawable.ic_launcher_foreground)
-                listener(
-                    onSuccess = { _, result ->
-                        Palette.Builder(result.drawable.toBitmap()).generate() { palette ->
-                            val rgb = palette?.dominantSwatch?.rgb
-                            if (rgb != null) {
-                                paletteCard.setCardBackgroundColor(rgb)
-                            }
+    @BindingAdapter("android:palette_image", "android:palette_card")
+    @JvmStatic
+    fun homePokeImagePalette(view: ImageView, url: String, paletteCard: MaterialCardView) {
+        view.load(extractPokemonImage(url)) {
+            allowHardware(false)
+            crossfade(200)
+            error(R.drawable.ic_launcher_foreground)
+            listener(
+                onSuccess = { _, result ->
+                    Palette.Builder(result.drawable.toBitmap()).generate() { palette ->
+                        val rgb = palette?.dominantSwatch?.rgb
+                        if (rgb != null) {
+                            paletteCard.setCardBackgroundColor(rgb)
                         }
                     }
-                )
-            }
-        }
-
-        @BindingAdapter("android:lower_to_upper")
-        @JvmStatic
-        fun homeLowerToUpperCase(view: TextView, data: PokemonResult) {
-            view.text = data.name.replaceFirstChar { it.uppercase() }
-        }
-
-        @BindingAdapter("android:stats_pokemon")
-        @JvmStatic
-        fun detailPokemonStats(view: TextView, data: StatsItem) {
-            view.text = data.baseStat.toString()
-        }
-
-        @BindingAdapter("android:stats_pokemon_progress")
-        @JvmStatic
-        fun detailPokemonStatsProgress(view: ProgressBar, data: StatsItem) {
-            view.secondaryProgress = 255
-            view.max = 255
-            CoroutineScope(Dispatchers.Main).launch {
-                var state = 0
-                while (state <= data.baseStat) {
-                    view.progress = state
-                    state++
-                    delay(10)
                 }
+            )
+        }
+    }
+
+    @BindingAdapter("android:lower_to_upper")
+    @JvmStatic
+    fun homeLowerToUpperCase(view: TextView, data: PokemonResult) {
+        view.text = data.name.replaceFirstChar { it.uppercase() }
+    }
+
+    @BindingAdapter("android:stats_pokemon")
+    @JvmStatic
+    fun detailPokemonStats(view: TextView, data: StatsItem) {
+        (data.baseStat.toString() + buildString {
+            append(" / 300")
+        }).also { view.text = it }
+    }
+
+    @BindingAdapter("android:stats_pokemon_progress")
+    @JvmStatic
+    fun detailPokemonStatsProgress(view: ProgressBar, data: StatsItem) {
+        view.secondaryProgress = 255
+        view.max = 255
+        CoroutineScope(Dispatchers.Main).launch {
+            var state = 0
+            while (state <= data.baseStat) {
+                view.progress = state
+                state++
+                delay(10)
             }
         }
-
-        @BindingAdapter("android:pokemon_types")
-        @JvmStatic
-        fun detailPokemonTypes(view: Chip, data: TypesItem) {
-
-
-        }
-
-//        @BindingAdapter("android:detail_image_poke")
-//        @JvmStatic
-//        fun detailPokeImage(image: ImageView, url: String?) {
-//            image.load(url) {
-//                crossfade(200)
-//                error(R.drawable.ic_launcher_foreground)
-//            }
-//        }
-
-//        @BindingAdapter("android:pokemon_poster")
-//        @JvmStatic
-//        fun backdropPath(view: ImageView, url: String) {
-//            view.load(extractPokemonImage(url)) {
-//                crossfade(200)
-//                error(R.drawable.ic_launcher_foreground)
-//            }
-//        }
-
-//        @JvmStatic
-//        @BindingAdapter("bindPokemonTypes")
-//        fun bindPokemonTypes(recyclerView: RecyclerView, types: List<TypesItem>?) {
-//            if (types != null) {
-//                recyclerView.clear()
-//                for (type in it) {
-//                    with(recyclerView) {
-//                        addRibbon(
-//                            ribbonView(context) {
-//                                setText(type.type.name)
-//                                setTextColor(Color.WHITE)
-//                                setPaddingLeft(84f)
-//                                setPaddingRight(84f)
-//                                setPaddingTop(2f)
-//                                setPaddingBottom(10f)
-//                                setTextSize(16f)
-//                                setRibbonRadius(120f)
-//                                setTextStyle(Typeface.BOLD)
-//                                setRibbonBackgroundColorResource(
-//                                    PokemonTypeUtils.getTypeColor(type.type.name)
-//                                )
-//                            }.apply {
-//                                maxLines = 1
-//                                gravity = Gravity.CENTER
-//                            }
-//                        )
-//                        addItemDecoration(SpacesItemDecoration())
-//                    }
-//                }
-//            }
-//        }
-
-//        @BindingAdapter("android:pokemon_type")
-//        @JvmStatic
-//        fun pokemonType(view: TextView, data: List<TypesItem>) {
-//            if (data.size > 3) {
-//                view.text = data[1].type.name
-//                view.visibility = View.VISIBLE
-//            } else {
-//                view.visibility = View.GONE
-//            }
-//        }
-
-
     }
+
+    @BindingAdapter("android:stat_pokemon_string")
+    @JvmStatic
+    fun detailPokemonStatsString(view: TextView, data: StatsItem) {
+        if (data.stat.name.contains("-")) {
+            val first = data.stat.name.substringBefore("-").replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+            val second = data.stat.name.substringAfter("-").replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+            "$first - $second".also { view.text = it }
+        } else view.text = data.stat.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+    }
+
+    @BindingAdapter("android:pokemon_types")
+    @JvmStatic
+    fun detailPokemonTypes(view: Chip, data: TypesItem) {
+        view.text = data.type.name
+        view.setChipBackgroundColorResource(getTypeColor(data))
+    }
+
 }

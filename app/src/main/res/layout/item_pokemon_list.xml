@@ -14,7 +14,7 @@
         android:id="@+id/cvPokemonList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="15dp"
         android:navigate_to_pokemon_detail="@{pokemonResults.name}"
         app:cardCornerRadius="25dp"
         app:cardElevation="15dp">

@@ -18,5 +18,6 @@
     <string name="pokemon_number_format">#%03d</string>
     <string name="pokemon_format_weight">%.1f kg</string>
     <string name="pokemon_format_height">%d cm</string>
+    <string name="pokemon_format_base_stats">%d / 300</string>
 
 </resources>

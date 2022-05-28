@@ -1,13 +1,14 @@
 package com.pokeinfinite.utils
 
 import com.pokeinfinite.R
+import com.pokeinfinite.data.model.TypesItem
 
 fun extractPokemonImage(url: String?): String {
     val index = url?.split("/".toRegex())?.dropLast(1)?.last()
     return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$index.png"
 }
-fun getTypeColor(type: String): Int {
-    return when (type) {
+fun getTypeColor(type: TypesItem): Int {
+    return when (type.type.name.lowercase()) {
         "fighting" -> R.color.fighting
         "flying" -> R.color.flying
         "poison" -> R.color.poison

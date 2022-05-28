@@ -11,12 +11,13 @@ import com.pokeinfinite.utils.DiffUtils
 
 class ItemPokeStatsAdapter : RecyclerView.Adapter<ItemPokeStatsAdapter.StatViewHolder>() {
 
-    private var statsResult = emptyList<StatsItem>()
+    private var statsResult = ArrayList<StatsItem>()
 
     inner class StatViewHolder(private val binding: ItemPokemonStatsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(statsItem: StatsItem) {
             binding.pokeStats = statsItem
+            binding.executePendingBindings()
             binding.tvStatsName.isSelected = true
         }
     }
@@ -36,7 +37,7 @@ class ItemPokeStatsAdapter : RecyclerView.Adapter<ItemPokeStatsAdapter.StatViewH
     fun statsDiffUtil(newData: SinglePokemonResponse) {
         val statsDiffUtil = DiffUtils(statsResult, newData.stats)
         val diffUtilResult = DiffUtil.calculateDiff(statsDiffUtil)
-        statsResult = newData.stats
+        statsResult = newData.stats as ArrayList<StatsItem>
         diffUtilResult.dispatchUpdatesTo(this)
     }
 

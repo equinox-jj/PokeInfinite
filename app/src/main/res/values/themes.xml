@@ -14,13 +14,14 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/background</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.CardView" parent="">
         <item name="cornerFamilyBottomLeft">rounded</item>
         <item name="cornerFamilyBottomRight">rounded</item>
-        <item name="cornerSizeBottomLeft">20%</item>
-        <item name="cornerSizeBottomRight">20%</item>
+        <item name="cornerSizeBottomLeft">15%</item>
+        <item name="cornerSizeBottomRight">15%</item>
     </style>
 
 <!--    <style name="Theme.TestMaterial" parent="Base.Theme.TestMaterial">-->
