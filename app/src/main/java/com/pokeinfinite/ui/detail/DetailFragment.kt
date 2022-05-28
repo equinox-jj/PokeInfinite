@@ -32,6 +32,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val typesAdapter by lazy { ItemPokeTypesAdapter() }
     private val statsAdapter by lazy { ItemPokeStatsAdapter() }
 
+    private var isLoading: Boolean = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDetailBinding.bind(view)
@@ -58,25 +60,15 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.pokemonDetailResponse.observe(viewLifecycleOwner) { pokemonDetail ->
             when (pokemonDetail) {
                 is ApiResource.Loading -> {
-                    binding.rvDetailPokemonStats.visibility = View.GONE
-                    binding.rvDetailPokemonTypes.visibility = View.GONE
-                    binding.tvDesc.visibility = View.GONE
-                    binding.shapeImageDetail.visibility = View.GONE
-                    binding.tvDetailPokemonNumber.visibility = View.GONE
-                    binding.cardDesc.visibility = View.GONE
-                    binding.cardStats.visibility = View.GONE
+                    isLoading(true)
                 }
                 is ApiResource.Success -> {
                     pokemonDetail.data?.let { initPokeDetail(it) }
-                    binding.rvDetailPokemonStats.visibility = View.VISIBLE
-                    binding.rvDetailPokemonTypes.visibility = View.VISIBLE
-                    binding.tvDesc.visibility = View.VISIBLE
-                    binding.shapeImageDetail.visibility = View.VISIBLE
-                    binding.tvDetailPokemonNumber.visibility = View.VISIBLE
-                    binding.cardDesc.visibility = View.VISIBLE
-                    binding.cardStats.visibility = View.VISIBLE
+                    isLoading(false)
                 }
-                is ApiResource.Error -> {}
+                is ApiResource.Error -> {
+                    isLoading(false)
+                }
             }
         }
 
@@ -84,9 +76,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.pokemonSpeciesResponse.observe(viewLifecycleOwner) { pokemonDetail ->
             when (pokemonDetail) {
                 is ApiResource.Loading -> {}
-                is ApiResource.Success -> {
-                    pokemonDetail.data?.let { initPokeSpecies(it) }
-                }
+                is ApiResource.Success -> { pokemonDetail.data?.let { initPokeSpecies(it) } }
                 is ApiResource.Error -> {}
             }
         }
@@ -144,6 +134,24 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     }
                 }
             )
+        }
+    }
+
+    private fun isLoading(boolean: Boolean) {
+        binding.apply {
+            if (boolean) {
+                isLoading = true
+                rvDetailPokemonTypes.visibility = View.GONE
+                rvDetailPokemonStats.visibility = View.GONE
+                pbDetail.visibility = View.VISIBLE
+                scrollDetail.visibility = View.GONE
+            } else {
+                isLoading = false
+                rvDetailPokemonTypes.visibility = View.VISIBLE
+                rvDetailPokemonStats.visibility = View.VISIBLE
+                pbDetail.visibility = View.GONE
+                scrollDetail.visibility = View.VISIBLE
+            }
         }
     }
 
