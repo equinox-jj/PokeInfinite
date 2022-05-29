@@ -96,4 +96,7 @@ dependencies {
 
     // Rainbow
     implementation "com.github.skydoves:rainbow:1.0.3"
+
+    // Splash
+    implementation 'androidx.core:core-splashscreen:1.0.0-rc01'
 }
